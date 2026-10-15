@@ -46,6 +46,10 @@
 
 **Arr Mcp** is a production-grade Agent and Model Context Protocol (MCP) server designed to interface directly with Arr Suite MCP Server for Agentic AI!.
 
+## Project origin
+
+This project began as a fork of [Knuckles-Team/arr-mcp](https://github.com/Knuckles-Team/arr-mcp). It is now maintained independently under [marcosisocram/arr-mcp](https://github.com/marcosisocram/arr-mcp), with its own direction and planned integrations. The original project is credited here as the starting point; this repository is not an official continuation of or affiliated with Knuckles-Team.
+
 ---
 
 ## Key Features
