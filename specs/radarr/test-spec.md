@@ -13,7 +13,7 @@ Governing spec: [spec.md](spec.md).
 | T-007 | FR-007 | HTTP/tool contract | Mock `POST /command` and `GET /command/{id}`. | `MoviesSearch` with exactly the explicit movie ID; tracked state decoded; non-positive ID rejected. | |
 | T-008 | FR-008 | HTTP/tool contract | Mock `GET /queue` and `GET /history`. | Server-side paging passed through; records decoded; page/pageSize bounds enforced. | |
 | T-009 | FR-009 | Unit | Mock timeout, cancellation, redirect, and an upstream 500 whose body contains a secret. | Cancellation honored; TLS defaults retained; redirect not followed; error contains operation/status only. | |
-| T-010 | FR-010 | Build/package | Run the Go gates and build the Docker image. | Go checks pass; the container builds and runs non-root without Python. | |
+| T-010 | FR-010 | Build/package | Run the Go gates and build the Docker image. | Go checks pass; the container builds and runs non-root without Python. | `docker build` ok at `3ad3598`; inspected `User=nonroot:nonroot`, `Health=healthy`, `SIGTERM` exit 0. |
 
 ## Negative and boundary cases
 
@@ -22,3 +22,14 @@ Cover malformed or userinfo-bearing upstream URLs, a missing API key, oversized 
 ## Quality and release proof
 
 Run `gofmt -l .`, `go test ./...`, `go vet ./...`, `go test -race ./...`, `docker build -f docker/radarr.Dockerfile .`, and the spec-standard/status checks. Record command outcomes before marking delivery complete. Live Radarr validation is read-only by default; add, monitoring, and search against a real instance require explicit operator authorization.
+
+Recorded at revision `3ad3598` on 2026-10-16 (container host, Go 1.26.2):
+
+- `gofmt -l cmd internal` — no output.
+- `go vet ./...` — clean.
+- `go test ./...` — `internal/radarr` ok; `internal/qbittorrent` ok.
+- `go test -race ./...` — ok.
+- `docker build -f docker/radarr.Dockerfile .` — ok; the built image runs `User=nonroot:nonroot`, reports `Health=healthy`, and exits 0 on `SIGTERM` with a read-only root filesystem and all capabilities dropped.
+- `pipelines-hook spec-standard --root .` — clean (2 specs); `pipelines-hook spec-status --root .` — up to date.
+- No live Radarr instance was exercised in this revision; `RADARR_URL` for the operator's `6.4.4.10685-ls321` instance remains to be validated read-only.
+

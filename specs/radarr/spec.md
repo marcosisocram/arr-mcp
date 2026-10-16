@@ -38,16 +38,16 @@ Explicit non-goals: removing movies or files, manual import, editing indexers/do
 
 | Requirement | Design section | Test ID | Evidence |
 |---|---|---|---|
-| FR-001 | [Architecture](plan.md#architecture) | T-001 | |
-| FR-002 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-002 | |
-| FR-003 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-003 | |
-| FR-004 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-004 | |
-| FR-005 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-005 | |
-| FR-006 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-006 | |
-| FR-007 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-007 | |
-| FR-008 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-008 | |
-| FR-009 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-009 | |
-| FR-010 | [Quality and release gates](plan.md#quality-and-release-gates) | T-010 | |
+| FR-001 | [Architecture](plan.md#architecture) | T-001 | `go test ./internal/radarr -run TestMCPContract` ok at `3ad3598`. |
+| FR-002 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-002 | `TestConfigValidation`, `TestNoRedirectLeaksAPIKey` ok at `3ad3598`. |
+| FR-003 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-003 | `TestAPIKeyAndMovieReads`, `TestToolValidation` ok at `3ad3598`. |
+| FR-004 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-004 | `TestLookupProfilesAndRootFolders` ok at `3ad3598`. |
+| FR-005 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-005 | `TestAddMovieIsDuplicateSafe` ok at `3ad3598`. |
+| FR-006 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-006 | `TestMutationBodiesAndErrorRedaction` ok at `3ad3598`. |
+| FR-007 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-007 | `TestSearchQueueAndHistory` ok at `3ad3598`. |
+| FR-008 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-008 | `TestSearchQueueAndHistory`, `TestToolValidation` ok at `3ad3598`. |
+| FR-009 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-009 | `TestCancellationAndTLSDefaults`, `TestNoRedirectLeaksAPIKey` ok at `3ad3598`. |
+| FR-010 | [Quality and release gates](plan.md#quality-and-release-gates) | T-010 | `docker build -f docker/radarr.Dockerfile .` ok at `3ad3598`; container non-root, healthy, SIGTERM exit 0. |
 
 ## Open questions
 
