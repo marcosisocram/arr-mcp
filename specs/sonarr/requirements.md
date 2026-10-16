@@ -1,0 +1,17 @@
+# CONN-ARR-MCP-SONARR — Requirements
+
+Governing spec: [spec.md](spec.md).
+
+| ID | Requirement | Acceptance |
+|---|---|---|
+| CONN-ARR-MCP-SONARR-R001 | **Standalone server.** `cmd/sonarr-mcp/main.go` serves an independent official-SDK MCP at `/mcp/sonarr` over Streamable HTTP against Sonarr API v3. | `TestMCPContract` initializes the real entrypoint handler and lists its catalog. |
+| CONN-ARR-MCP-SONARR-R002 | **Trusted configuration and authentication.** `internal/sonarr/config.go` and `client.go` load `SONARR_URL` (trusted, never a tool argument), require `SONARR_API_KEY`, default `SONARR_LISTEN_ADDR`, send the key as `X-Api-Key`, and never follow redirects. | `TestConfigValidation`, `TestAPIKeyAndSeriesReads`, and `TestNoRedirectLeaksAPIKey` pass without exposing secrets. |
+| CONN-ARR-MCP-SONARR-R003 | **Read the library.** `internal/sonarr/client.go` and `tools.go` expose typed `sonarr_list_series` and `sonarr_get_series` reads with per-season monitoring data. | `TestAPIKeyAndSeriesReads` and `TestToolValidation` verify decoded data, filters, and rejection cases. |
+| CONN-ARR-MCP-SONARR-R004 | **Discover prerequisites.** `internal/sonarr/tools.go` exposes `sonarr_lookup_series`, `sonarr_list_quality_profiles`, and `sonarr_list_root_folders`. | `TestLookupProfilesAndRootFolders` verifies each typed response. |
+| CONN-ARR-MCP-SONARR-R005 | **Read episodes.** `internal/sonarr/tools.go` exposes `sonarr_list_episodes` scoped to one explicit series with optional season scoping, plus `sonarr_get_episode`. | `TestEpisodeReads` verifies series scoping, season filtering, and decoding. |
+| CONN-ARR-MCP-SONARR-R006 | **Add a series safely.** `internal/sonarr/tools.go` adds one series from an explicit TVDB ID, quality profile, and root folder, without a release search and without duplicating an existing TVDB ID. | `TestAddSeriesIsDuplicateSafe` asserts the POST body and the duplicate short-circuit. |
+| CONN-ARR-MCP-SONARR-R007 | **Control monitoring.** `internal/sonarr/tools.go` changes only the `monitored` flag of one explicit series, and only the `monitored` flag of explicit episodes. | `TestMutationBodiesAndErrorRedaction` and `TestEpisodeMonitorBody` assert field preservation and the `moveFiles=false` series update. |
+| CONN-ARR-MCP-SONARR-R008 | **Search and track.** `internal/sonarr/tools.go` issues `SeriesSearch`, `SeasonSearch`, and `EpisodeSearch` commands for explicit targets and reads a command by ID. | `TestSearchQueueAndHistory` asserts the command payloads and the tracked state. |
+| CONN-ARR-MCP-SONARR-R009 | **Track activity.** `internal/sonarr/tools.go` returns bounded queue and history pages. | `TestSearchQueueAndHistory` and `TestToolValidation` verify paging bounds and decoding. |
+| CONN-ARR-MCP-SONARR-R010 | **Bound network behavior.** `internal/sonarr/client.go` applies timeouts, context cancellation, default TLS verification, bounded responses, and sanitized errors. | `TestCancellationAndTLSDefaults` and `TestMutationBodiesAndErrorRedaction` verify the bounds and redaction. |
+| CONN-ARR-MCP-SONARR-R011 | **Document and package.** `docs/sonarr-go.md` and `docker/sonarr.Dockerfile` document and package the server. | `docker build -f docker/sonarr.Dockerfile .` succeeds. |
