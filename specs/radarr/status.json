@@ -2,7 +2,7 @@
   "schema_version": 2,
   "spec_id": "CONN-ARR-MCP-RADARR",
   "owner_repo": "arr-mcp",
-  "delivery_state": "SPECIFIED",
+  "delivery_state": "LANDED",
   "requirement_ids": [
     "CONN-ARR-MCP-RADARR-R001",
     "CONN-ARR-MCP-RADARR-R002",
@@ -19,8 +19,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R001",
       "title": "Standalone server",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/mcp_test.go:14"
       ]
@@ -28,8 +30,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R002",
       "title": "Trusted configuration and authentication",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:13",
         "internal/radarr/client_test.go:279",
@@ -39,8 +43,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R003",
       "title": "Read the library",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:302",
         "internal/radarr/client_test.go:32",
@@ -51,8 +57,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R004",
       "title": "Discover prerequisites",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:61",
         "internal/radarr/mcp_test.go:14"
@@ -61,8 +69,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R005",
       "title": "Add a movie safely",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:302",
         "internal/radarr/client_test.go:93",
@@ -72,8 +82,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R006",
       "title": "Control monitoring",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:146",
         "internal/radarr/mcp_test.go:14"
@@ -82,8 +94,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R007",
       "title": "Search and track",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:191",
         "internal/radarr/mcp_test.go:14"
@@ -92,8 +106,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R008",
       "title": "Track activity",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:191",
         "internal/radarr/client_test.go:302",
@@ -103,8 +119,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R009",
       "title": "Bound network behavior",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": [
         "internal/radarr/client_test.go:146",
         "internal/radarr/client_test.go:248",
@@ -114,8 +132,10 @@
     {
       "id": "CONN-ARR-MCP-RADARR-R010",
       "title": "Document and package",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "LANDED",
+      "landed_in": [
+        "3ad35987eeb0"
+      ],
       "verified_by": []
     }
   ]
