@@ -1,0 +1,23 @@
+services:
+  qbittorrent-mcp:
+    build:
+      context: ../..
+      dockerfile: docker/qbittorrent.Dockerfile
+    environment:
+      QBITTORRENT_URL: ${QBITTORRENT_URL:?Set QBITTORRENT_URL}
+      QBITTORRENT_API_KEY: ${QBITTORRENT_API_KEY:-}
+      QBITTORRENT_USERNAME: ${QBITTORRENT_USERNAME:-}
+      QBITTORRENT_PASSWORD: ${QBITTORRENT_PASSWORD:-}
+      QBITTORRENT_LISTEN_ADDR: 0.0.0.0:8080
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "/qbittorrent-mcp", "--healthcheck"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
