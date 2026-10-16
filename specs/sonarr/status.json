@@ -21,7 +21,9 @@
       "id": "CONN-ARR-MCP-SONARR-R001",
       "title": "Standalone server",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/mcp_test.go:15"
       ]
@@ -30,7 +32,9 @@
       "id": "CONN-ARR-MCP-SONARR-R002",
       "title": "Trusted configuration and authentication",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:14",
         "internal/sonarr/client_test.go:376",
@@ -41,7 +45,9 @@
       "id": "CONN-ARR-MCP-SONARR-R003",
       "title": "Read the library",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:33",
         "internal/sonarr/client_test.go:399",
@@ -52,7 +58,9 @@
       "id": "CONN-ARR-MCP-SONARR-R004",
       "title": "Discover prerequisites",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:65",
         "internal/sonarr/mcp_test.go:15"
@@ -62,7 +70,9 @@
       "id": "CONN-ARR-MCP-SONARR-R005",
       "title": "Read episodes",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:97",
         "internal/sonarr/mcp_test.go:15"
@@ -72,7 +82,9 @@
       "id": "CONN-ARR-MCP-SONARR-R006",
       "title": "Add a series safely",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:134",
         "internal/sonarr/client_test.go:399",
@@ -83,7 +95,9 @@
       "id": "CONN-ARR-MCP-SONARR-R007",
       "title": "Control monitoring",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:187",
         "internal/sonarr/client_test.go:232",
@@ -94,7 +108,9 @@
       "id": "CONN-ARR-MCP-SONARR-R008",
       "title": "Search and track",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:265",
         "internal/sonarr/mcp_test.go:15"
@@ -104,7 +120,9 @@
       "id": "CONN-ARR-MCP-SONARR-R009",
       "title": "Track activity",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:265",
         "internal/sonarr/client_test.go:399",
@@ -115,7 +133,9 @@
       "id": "CONN-ARR-MCP-SONARR-R010",
       "title": "Bound network behavior",
       "delivery_state": "VERIFIED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": [
         "internal/sonarr/client_test.go:187",
         "internal/sonarr/client_test.go:345",
@@ -126,7 +146,9 @@
       "id": "CONN-ARR-MCP-SONARR-R011",
       "title": "Document and package",
       "delivery_state": "LANDED",
-      "landed_in": [],
+      "landed_in": [
+        "5923774f4356"
+      ],
       "verified_by": []
     }
   ]
