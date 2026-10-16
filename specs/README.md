@@ -13,3 +13,4 @@ Read the existing specs first. Extend the spec that owns the behavior. Create a 
 ## Local specifications
 
 [`CONN-ARR-MCP`](qbittorrent/spec.md) — Standalone Go qBittorrent MCP pilot for read and control operations.
+[`CONN-ARR-MCP-RADARR`](radarr/spec.md) — Standalone Go Radarr MCP for library reads, add, monitoring, and release search.
