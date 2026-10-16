@@ -21,7 +21,6 @@ models/
 .github/
 build/
 .bumpversion.cfg
-.pre-commit-config.yaml
 pytest.ini
 ./tests/
 

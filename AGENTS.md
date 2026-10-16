@@ -46,8 +46,9 @@ sequenceDiagram
 # Installation
 pip install .[all]
 
-# Quality & Linting (run from project root)
-pre-commit run --all-files
+# Quality & Linting
+# No pre-commit hooks (removed per issue #3 — Python/uv gates blocked independent Go MCP work).
+# Run relevant checks directly, e.g.: pytest tests -q
 
 # Execution Commands
 # arr-mcp
@@ -283,7 +284,6 @@ arr_mcp.agent_server:agent_server
 │   │   ├── zlib.meta.json
 │   │   └── zoneinfo
 │   └── CACHEDIR.TAG
-├── .pre-commit-config.yaml
 ├── .pytest_cache
 │   ├── .gitignore
 │   ├── CACHEDIR.TAG
@@ -451,7 +451,6 @@ async def my_tool(param: str) -> str:
 
 ## Dos and Don'ts
 **Do:**
-- Run `pre-commit` before pushing changes.
 - Use existing patterns from `agent-utilities`.
 - Keep tools focused and idempotent where possible.
 
@@ -462,7 +461,6 @@ async def my_tool(param: str) -> str:
 
 ## Safety & Boundaries
 **Always do:**
-- Run lint/test via `pre-commit`.
 - Use `agent-utilities` base classes.
 
 **Ask first:**
@@ -535,7 +533,7 @@ judgment; the bias here is correctness over speed.
   reformat, or "improve" working code adjacent to the operator's change; match the existing style
   even where the operator'd do it differently. Remove only the imports/symbols the operator's own change
   orphaned; if the operator spot unrelated dead code, mention it rather than removing it inline.
-  *Exception — the Quality Bar below:* lint/format/type errors the pre-commit gate flags
+  *Exception — the Quality Bar below:* lint/format/type errors the relevant check flags
   get fixed in either case of who introduced them. In short: **surgical on behavior, clean on
   lint.**
 - **Check against a goal.** Turn the task into a checkable outcome before the operator start:
@@ -545,20 +543,17 @@ judgment; the bias here is correctness over speed.
 
 ## Quality Bar — Leave the Codebase Clean (REQUIRED)
 
-After completing any code change, run the project's pre-commit suite and drive it
-**fully green** before committing:
+No pre-commit hooks are configured (removed per issue #3). After completing any
+code change, run the relevant checks directly (e.g. `pytest tests -q`) and drive
+them **fully green** before committing.
 
-```bash
-pre-commit run --all-files
-```
-
-Resolve **every** issue it reports — failures, lint errors, type errors, and
+Resolve **every** issue they report — failures, lint errors, type errors, and
 warnings — **including problems that pre-date the operator's change and were not caused by
 the operator's edits**. The standing goal is a clean, working codebase with **no errors and
 no warnings**. Do not silence checks (`# noqa`, `# type: ignore`, `SKIP=`,
 `--no-verify`) to force green unless the exception is already documented in this
-file as a known, unavoidable limitation. Only commit once `pre-commit run
---all-files` passes cleanly; if a check legitimately cannot pass, stop and explain
+file as a known, unavoidable limitation. Only commit once the relevant checks
+pass cleanly; if a check legitimately cannot pass, stop and explain
 why rather than bypassing it.
 
 ## Working with Git Worktrees (multi-session)
@@ -584,7 +579,7 @@ under `${WORKTREE_ROOT}/` (outside the workspace scan, so the sync leaves them
 alone).
 
 **Finishing work in a worktree** — run this sequence before calling it done:
-1. **Pre-commit green** — `pre-commit run --all-files`; resolve every issue per the
+1. **Checks green** — run the relevant checks; resolve every issue per the
    Quality Bar above (including pre-existing), no `--no-verify`.
 2. **Commit** in the worktree.
 3. **Merge to main locally** — `rm_worktree merge <repo> <branch> --into main`
@@ -621,8 +616,8 @@ is what Dependabot flags. Rules:
    `pyproject.toml` AND `README.md`, plus `docker/Dockerfile` and any module `__version__`. Never
    add a file that embeds the version without a `[bumpversion:file:...]` entry for it.
 3. **Re-lock on every dependency change.** After editing `pyproject.toml` deps/extras, run
-   `uv lock` and commit `uv.lock` in the SAME change. The `uv-lock` pre-commit hook runs with
-   `--locked` and fails on drift — never bypass it. The committed `uv.lock` is the
+   `uv lock` and commit `uv.lock` in the SAME change. Verify with
+   `uv lock --check` — never commit a drifted lock. The committed `uv.lock` is the
    Dependabot/security surface.
 4. **Patch CVEs with a version floor at the source, then re-lock.** `uv` resolves one version
    graph-wide, so a lower-bound in the extra that pulls a dependency raises it for the whole lock.
