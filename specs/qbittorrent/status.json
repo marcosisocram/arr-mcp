@@ -1,0 +1,100 @@
+{
+  "schema_version": 2,
+  "spec_id": "CONN-ARR-MCP",
+  "owner_repo": "arr-mcp",
+  "delivery_state": "SPECIFIED",
+  "requirement_ids": [
+    "CONN-ARR-MCP-R001",
+    "CONN-ARR-MCP-R002",
+    "CONN-ARR-MCP-R003",
+    "CONN-ARR-MCP-R004",
+    "CONN-ARR-MCP-R005",
+    "CONN-ARR-MCP-R006",
+    "CONN-ARR-MCP-R007",
+    "CONN-ARR-MCP-R008"
+  ],
+  "requirements": [
+    {
+      "id": "CONN-ARR-MCP-R001",
+      "title": "Standalone server",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R002",
+      "title": "Safe authentication",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:13",
+        "internal/qbittorrent/client_test.go:170",
+        "internal/qbittorrent/client_test.go:52"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R003",
+      "title": "Read torrents",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:13",
+        "internal/qbittorrent/client_test.go:152",
+        "internal/qbittorrent/client_test.go:187",
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R004",
+      "title": "Read transfer state",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:13",
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R005",
+      "title": "Control torrent state",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:125",
+        "internal/qbittorrent/client_test.go:152",
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R006",
+      "title": "Control transfer limits",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:152",
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R007",
+      "title": "Bound network behavior",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:125",
+        "internal/qbittorrent/client_test.go:94"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R008",
+      "title": "Document and package pilot",
+      "delivery_state": "SPECIFIED",
+      "landed_in": [],
+      "verified_by": [
+        "internal/qbittorrent/mcp_test.go:13"
+      ]
+    }
+  ]
+}

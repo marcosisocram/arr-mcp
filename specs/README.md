@@ -12,4 +12,4 @@ Read the existing specs first. Extend the spec that owns the behavior. Create a 
 
 ## Local specifications
 
-This repository has no local spec yet.
+[`CONN-ARR-MCP`](qbittorrent/spec.md) — Standalone Go qBittorrent MCP pilot for read and control operations.
