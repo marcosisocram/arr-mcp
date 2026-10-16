@@ -2,7 +2,7 @@
   "schema_version": 2,
   "spec_id": "CONN-ARR-MCP",
   "owner_repo": "arr-mcp",
-  "delivery_state": "SPECIFIED",
+  "delivery_state": "VERIFIED",
   "requirement_ids": [
     "CONN-ARR-MCP-R001",
     "CONN-ARR-MCP-R002",
@@ -17,8 +17,10 @@
     {
       "id": "CONN-ARR-MCP-R001",
       "title": "Standalone server",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/mcp_test.go:13"
       ]
@@ -26,8 +28,10 @@
     {
       "id": "CONN-ARR-MCP-R002",
       "title": "Safe authentication",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:13",
         "internal/qbittorrent/client_test.go:170",
@@ -37,8 +41,10 @@
     {
       "id": "CONN-ARR-MCP-R003",
       "title": "Read torrents",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:13",
         "internal/qbittorrent/client_test.go:152",
@@ -49,8 +55,10 @@
     {
       "id": "CONN-ARR-MCP-R004",
       "title": "Read transfer state",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:13",
         "internal/qbittorrent/mcp_test.go:13"
@@ -59,8 +67,10 @@
     {
       "id": "CONN-ARR-MCP-R005",
       "title": "Control torrent state",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:125",
         "internal/qbittorrent/client_test.go:152",
@@ -70,8 +80,10 @@
     {
       "id": "CONN-ARR-MCP-R006",
       "title": "Control transfer limits",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:152",
         "internal/qbittorrent/mcp_test.go:13"
@@ -80,8 +92,10 @@
     {
       "id": "CONN-ARR-MCP-R007",
       "title": "Bound network behavior",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/client_test.go:125",
         "internal/qbittorrent/client_test.go:94"
@@ -90,8 +104,10 @@
     {
       "id": "CONN-ARR-MCP-R008",
       "title": "Document and package pilot",
-      "delivery_state": "SPECIFIED",
-      "landed_in": [],
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "c6f07bb7fabf"
+      ],
       "verified_by": [
         "internal/qbittorrent/mcp_test.go:13"
       ]
