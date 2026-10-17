@@ -10,4 +10,5 @@ FROM gcr.io/distroless/static-debian13:nonroot
 COPY --from=build /out/qbittorrent-mcp /qbittorrent-mcp
 USER nonroot:nonroot
 EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD ["/qbittorrent-mcp", "--healthcheck"]
 ENTRYPOINT ["/qbittorrent-mcp"]
