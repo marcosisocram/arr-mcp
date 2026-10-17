@@ -6,11 +6,13 @@ A separate executable/container that does not replace or require the Python Arr 
 
 Set `SONARR_URL` to the trusted Sonarr base URL and `SONARR_API_KEY` to its API key (Sonarr → Settings → General → Security). A base URL with an installation path prefix is supported, for example `https://host/sonarr`.
 
+If Sonarr restricts hostnames (Settings → General → Security: "Allowed Hostnames"), the MCP must call Sonarr through a hostname Sonarr accepts. Behind Kubernetes internal Services this typically requires overriding the limit by environment variable, for example `SONARR__SERVER__ALLOWEDHOSTS=sonarr.your.domain,sonarr.your-namespace.svc.cluster.local`; the typical symptom otherwise is an HTML `Bad Request - Invalid host name` from Kestrel.
+
 `SONARR_LISTEN_ADDR` defaults to `127.0.0.1:8080`. For containers, set it to `0.0.0.0:8080` and expose the port only on a trusted network or behind TLS and access control. The server does not provide inbound authentication. TLS verification for upstream HTTPS remains enabled, and redirects are never followed so the API key cannot be replayed to another origin.
 
 ## Tools
 
-Read tools: `sonarr_list_series` (with a `monitored` filter and `limit`/`offset`), `sonarr_get_series` (with per-season monitoring flags), `sonarr_lookup_series`, `sonarr_list_quality_profiles`, `sonarr_list_root_folders`, `sonarr_list_episodes` (scoped to one series, with optional season/`monitored`/`has_file` filters), `sonarr_get_episode`, `sonarr_get_queue`, `sonarr_get_history`, and `sonarr_get_command`.
+Read tools: `sonarr_list_series` (with a `monitored` filter and `limit`/`offset`), `sonarr_get_series` (with per-season monitoring flags), `sonarr_lookup_series`, `sonarr_list_quality_profiles`, `sonarr_list_root_folders`, `sonarr_list_episodes` (scoped to one series, with optional season/`monitored`/`has_file` filters), `sonarr_get_episode`, `sonarr_get_queue`, `sonarr_get_history`, and `sonarr_get_command`. List results are wrapped in an object — `{"series": [...]}`, `{"candidates": [...]}`, `{"profiles": [...]}`, `{"folders": [...]}`, `{"episodes": [...]}` — so every tool's `outputSchema` is a top-level `object`, as required by Python MCP SDK clients.
 
 Write tools: `sonarr_add_series`, `sonarr_set_series_monitored`, `sonarr_set_episode_monitored`, `sonarr_search_series`, `sonarr_search_season`, and `sonarr_search_episodes`.
 

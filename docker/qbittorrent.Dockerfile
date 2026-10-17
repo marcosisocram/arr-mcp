@@ -8,6 +8,6 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/qbittorrent-mcp ./
 
 FROM gcr.io/distroless/static-debian13:nonroot
 COPY --from=build /out/qbittorrent-mcp /qbittorrent-mcp
-USER nonroot:nonroot
+USER 65532:65532
 EXPOSE 8080
 ENTRYPOINT ["/qbittorrent-mcp"]

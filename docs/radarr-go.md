@@ -6,11 +6,13 @@ A separate executable/container that does not replace or require the Python Arr 
 
 Set `RADARR_URL` to the trusted Radarr base URL and `RADARR_API_KEY` to its API key (Radarr → Settings → General → Security). A base URL with an installation path prefix is supported, for example `https://host/radarr`.
 
+If Radarr restricts hostnames (Settings → General → Security: "Allowed Hostnames"), the MCP must call Radarr through a hostname Radarr accepts. Behind Kubernetes internal Services this typically requires overriding the limit by environment variable, for example `RADARR__SERVER__ALLOWEDHOSTS=radarr.your.domain,radarr.your-namespace.svc.cluster.local`; the typical symptom otherwise is an HTML `Bad Request - Invalid host name` from Kestrel.
+
 `RADARR_LISTEN_ADDR` defaults to `127.0.0.1:8080`. For containers, set it to `0.0.0.0:8080` and expose the port only on a trusted network or behind TLS and access control. The server does not provide inbound authentication. TLS verification for upstream HTTPS remains enabled, and redirects are never followed so the API key cannot be replayed to another origin.
 
 ## Tools
 
-Read tools: `radarr_list_movies` (with `monitored`/`has_file` filters and `limit`/`offset`), `radarr_get_movie`, `radarr_lookup_movies`, `radarr_list_quality_profiles`, `radarr_list_root_folders`, `radarr_get_queue`, `radarr_get_history`, and `radarr_get_command`.
+Read tools: `radarr_list_movies` (with `monitored`/`has_file` filters and `limit`/`offset`), `radarr_get_movie`, `radarr_lookup_movies`, `radarr_list_quality_profiles`, `radarr_list_root_folders`, `radarr_get_queue`, `radarr_get_history`, and `radarr_get_command`. List results are wrapped in an object — `{"movies": [...]}`, `{"candidates": [...]}`, `{"profiles": [...]}`, `{"folders": [...]}` — so every tool's `outputSchema` is a top-level `object`, as required by Python MCP SDK clients.
 
 Write tools: `radarr_add_movie`, `radarr_set_movie_monitored`, and `radarr_search_movie`.
 

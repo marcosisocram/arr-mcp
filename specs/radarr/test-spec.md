@@ -33,3 +33,6 @@ Recorded at revision `3ad3598` on 2026-10-16 (container host, Go 1.26.2):
 - `pipelines-hook spec-standard --root .` — clean (2 specs); `pipelines-hook spec-status --root .` — up to date.
 - No live Radarr instance was exercised in this revision; `RADARR_URL` for the operator's `6.4.4.10685-ls321` instance remains to be validated read-only.
 
+## Amendments
+
+- **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the four list/lookup tools return `{"movies"}`, `{"candidates"}`, `{"profiles"}`, and `{"folders"}` wrappers. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
@@ -75,6 +76,15 @@ func TestMCPReadAndControlContract(t *testing.T) {
 	}
 	if len(listed.Tools) != 9 {
 		t.Fatalf("got %d tools, want 9", len(listed.Tools))
+	}
+	for _, tool := range listed.Tools {
+		schema, err := json.Marshal(tool.OutputSchema)
+		if err != nil {
+			t.Fatalf("%s output schema is not JSON: %v", tool.Name, err)
+		}
+		if !strings.Contains(string(schema), `"type":"object"`) {
+			t.Fatalf("%s output schema is not a top-level object (Python SDK clients reject it): %s", tool.Name, schema)
+		}
 	}
 	properties, err := session.CallTool(context.Background(), &mcp.CallToolParams{
 		Name:      "qbittorrent_torrent_properties",

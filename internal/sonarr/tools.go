@@ -26,6 +26,26 @@ type ListSeriesInput struct {
 	Offset    int   `json:"offset,omitempty" jsonschema:"Series to skip after filtering."`
 }
 
+type ListSeriesOutput struct {
+	Series []Series `json:"series" jsonschema:"Series in the Sonarr library."`
+}
+
+type LookupSeriesOutput struct {
+	Candidates []Series `json:"candidates" jsonschema:"Candidate series with TVDB identifiers."`
+}
+
+type QualityProfilesOutput struct {
+	Profiles []QualityProfile `json:"profiles" jsonschema:"Available quality profiles."`
+}
+
+type RootFoldersOutput struct {
+	Folders []RootFolder `json:"folders" jsonschema:"Available root folders."`
+}
+
+type ListEpisodesOutput struct {
+	Episodes []Episode `json:"episodes" jsonschema:"Episodes of the requested series."`
+}
+
 type SeriesIDInput struct {
 	SeriesID int `json:"series_id" jsonschema:"Internal Sonarr series ID from sonarr_list_series or sonarr_add_series."`
 }
@@ -109,16 +129,16 @@ type EmptyInput struct{}
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "sonarr-mcp", Version: "0.1.0"}, nil)
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_series", Description: "List series in the Sonarr library with an optional monitored filter and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListSeriesInput) (*mcp.CallToolResult, []Series, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_series", Description: "List series in the Sonarr library with an optional monitored filter and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListSeriesInput) (*mcp.CallToolResult, ListSeriesOutput, error) {
 		library, err := client.ListSeries(ctx)
 		if err != nil {
-			return nil, nil, err
+			return nil, ListSeriesOutput{}, err
 		}
 		filtered, err := seriesListFilter(library, input.Monitored, input.Offset, input.Limit)
 		if err != nil {
-			return nil, nil, err
+			return nil, ListSeriesOutput{}, err
 		}
-		return nil, filtered, nil
+		return nil, ListSeriesOutput{Series: filtered}, nil
 	})
 	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_get_series", Description: "Read one series from the Sonarr library by its internal Sonarr ID, including per-season monitoring flags."}, func(ctx context.Context, _ *mcp.CallToolRequest, input SeriesIDInput) (*mcp.CallToolResult, Series, error) {
 		if input.SeriesID <= 0 {
@@ -127,38 +147,38 @@ func NewMCPServer(client *Client) *mcp.Server {
 		series, err := client.SeriesByID(ctx, input.SeriesID)
 		return nil, series, err
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_lookup_series", Description: "Search Sonarr's series metadata source for candidate series to add; returns candidate TVDB identifiers only."}, func(ctx context.Context, _ *mcp.CallToolRequest, input LookupSeriesInput) (*mcp.CallToolResult, []Series, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_lookup_series", Description: "Search Sonarr's series metadata source for candidate series to add; returns candidate TVDB identifiers only."}, func(ctx context.Context, _ *mcp.CallToolRequest, input LookupSeriesInput) (*mcp.CallToolResult, LookupSeriesOutput, error) {
 		term := strings.TrimSpace(input.Term)
 		if term == "" {
-			return nil, nil, fmt.Errorf("term is required")
+			return nil, LookupSeriesOutput{}, fmt.Errorf("term is required")
 		}
 		limit := input.Limit
 		if limit == 0 {
 			limit = 20
 		}
 		if limit < 1 || limit > 50 {
-			return nil, nil, fmt.Errorf("limit must be between 1 and 50")
+			return nil, LookupSeriesOutput{}, fmt.Errorf("limit must be between 1 and 50")
 		}
 		library, err := client.LookupSeries(ctx, term)
 		if err != nil {
-			return nil, nil, err
+			return nil, LookupSeriesOutput{}, err
 		}
 		if len(library) > limit {
 			library = library[:limit]
 		}
-		return nil, library, nil
+		return nil, LookupSeriesOutput{Candidates: library}, nil
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_quality_profiles", Description: "List the quality profiles available when adding a series."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, []QualityProfile, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_quality_profiles", Description: "List the quality profiles available when adding a series."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, QualityProfilesOutput, error) {
 		profiles, err := client.QualityProfiles(ctx)
-		return nil, profiles, err
+		return nil, QualityProfilesOutput{Profiles: profiles}, err
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_root_folders", Description: "List the root folders available when adding a series."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, []RootFolder, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_root_folders", Description: "List the root folders available when adding a series."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, RootFoldersOutput, error) {
 		folders, err := client.RootFolders(ctx)
-		return nil, folders, err
+		return nil, RootFoldersOutput{Folders: folders}, err
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_episodes", Description: "List episodes of one explicit series with optional season, monitored, and has-file filters and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListEpisodesInput) (*mcp.CallToolResult, []Episode, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_episodes", Description: "List episodes of one explicit series with optional season, monitored, and has-file filters and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListEpisodesInput) (*mcp.CallToolResult, ListEpisodesOutput, error) {
 		episodes, err := listEpisodes(ctx, client, input)
-		return nil, episodes, err
+		return nil, ListEpisodesOutput{Episodes: episodes}, err
 	})
 	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_get_episode", Description: "Read one episode from the Sonarr library by its internal Sonarr episode ID."}, func(ctx context.Context, _ *mcp.CallToolRequest, input EpisodeIDInput) (*mcp.CallToolResult, Episode, error) {
 		if input.EpisodeID <= 0 {

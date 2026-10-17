@@ -33,3 +33,7 @@ Recorded on 2026-10-16 (container host, Go 1.26.2):
 - `docker build -f docker/sonarr.Dockerfile .` — ok; the built image runs `User=nonroot:nonroot`, reports `Health` via `/sonarr-mcp --healthcheck`, serves `/health` as `{"status":"ok"}`, and exits 0 on `SIGTERM` with a read-only root filesystem and all capabilities dropped.
 - `pipelines-hook` is not installed in this environment, so the spec-standard/status checks could not be run; the spec follows the `_template/` file set and the `CONN-ARR-MCP-SONARR` ID form.
 - No live Sonarr instance was exercised in this revision; the operator's `4.0.20.3014-ls329` instance remains to be validated read-only.
+
+## Amendments
+
+- **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the five list/lookup tools return `{"series"}`, `{"candidates"}`, `{"profiles"}`, `{"folders"}`, and `{"episodes"}` wrappers. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.

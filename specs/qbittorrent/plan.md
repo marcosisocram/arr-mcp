@@ -37,3 +37,7 @@ Use context-bound requests, explicit timeout, bounded response reads, and saniti
 ## Risks, alternatives, and decisions
 
 Bearer API key is only supported by qBittorrent >=5.2.0; username/password remains supported for older versions. Hash validation should accommodate valid v1/v2 torrent identifiers according to WebAPI documentation, rather than assuming only 40 hex digits if v2 hashes differ. The tools deliberately omit a wildcard pause/resume to prevent accidental global state changes. No aggregate server is implemented in this pilot.
+
+## Amendments
+
+- **2026-10-16 (issue #8):** `qbittorrent_list_torrents` output changes from a bare array to `{"torrents": [...]}`. The go-sdk infers `{"type": ["null", "array"]}` for top-level slices, which Python MCP SDK clients (pydantic validation, e.g. hermes-agent) reject before any client-side tool filtering, dropping the whole session. Every tool output is now a top-level object so `outputSchema.type` is `"object"`. Input schemas are unchanged.

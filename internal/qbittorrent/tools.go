@@ -44,19 +44,23 @@ type TransferLimitsOutput struct {
 	UploadLimit   int64 `json:"upload_limit" jsonschema:"Upload limit in bytes per second; zero means unlimited."`
 }
 
+type ListTorrentsOutput struct {
+	Torrents []Torrent `json:"torrents" jsonschema:"Torrents matching the filters."`
+}
+
 type SpeedLimitsModeOutput struct {
 	Enabled bool `json:"enabled" jsonschema:"Whether alternative speed limits are enabled."`
 }
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "qbittorrent-mcp", Version: "0.1.0"}, nil)
-	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_torrents", Description: "List torrents with optional status, category, tag, and paging filters."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListTorrentsInput) (*mcp.CallToolResult, []Torrent, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_torrents", Description: "List torrents with optional status, category, tag, and paging filters."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListTorrentsInput) (*mcp.CallToolResult, ListTorrentsOutput, error) {
 		query, err := torrentListQuery(input)
 		if err != nil {
-			return nil, nil, err
+			return nil, ListTorrentsOutput{}, err
 		}
 		result, err := client.ListTorrents(ctx, query)
-		return nil, result, err
+		return nil, ListTorrentsOutput{Torrents: result}, err
 	})
 	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_torrent_properties", Description: "Read operational properties for one torrent."}, func(ctx context.Context, _ *mcp.CallToolRequest, input TorrentPropertiesInput) (*mcp.CallToolResult, TorrentProperties, error) {
 		if !torrentHashPattern.MatchString(input.Hash) {

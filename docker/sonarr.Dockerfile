@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/sonarr-mcp ./cmd/s
 
 FROM gcr.io/distroless/static-debian13:nonroot
 COPY --from=build /out/sonarr-mcp /sonarr-mcp
-USER nonroot:nonroot
+USER 65532:65532
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD ["/sonarr-mcp", "--healthcheck"]
 ENTRYPOINT ["/sonarr-mcp"]
