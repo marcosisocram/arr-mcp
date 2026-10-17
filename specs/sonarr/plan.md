@@ -63,3 +63,7 @@ Use context-bound requests, an explicit 15-second timeout, bounded response read
 - Sonarr's `series/lookup?term=tvdb:{id}` returns an array rather than a single resource; the add path takes the first entry whose `tvdbId` matches and rejects the add when none matches. Accepted: exact-ID lookup endpoints do not exist in API v3.
 - The `GET /series/{id}` + `PUT /series/{id}` round-trip for series monitoring costs one extra request but guarantees no field is dropped by a partial update. Episode monitoring uses the dedicated `PUT /episode/monitor` patch endpoint and needs no fetch.
 - No live mutation happens in the default suite; real add/monitor/search calls stay opt-in.
+
+## Amendments
+
+- **2026-10-16 (issue #8):** `sonarr_list_series`, `sonarr_lookup_series`, `sonarr_list_quality_profiles`, `sonarr_list_root_folders`, and `sonarr_list_episodes` outputs change from bare arrays to `{"series": [...]}`, `{"candidates": [...]}`, `{"profiles": [...]}`, `{"folders": [...]}`, and `{"episodes": [...]}`. The go-sdk infers `{"type": ["null", "array"]}` for top-level slices, which Python MCP SDK clients (pydantic validation, e.g. hermes-agent) reject before any client-side tool filtering, dropping the whole session. Every tool output is now a top-level object so `outputSchema.type` is `"object"`. Input schemas are unchanged.

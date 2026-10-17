@@ -21,3 +21,7 @@ Cover malformed upstream URL, invalid auth combinations, unsafe hash/filter valu
 ## Quality and release proof
 
 Run `go test ./...`, `go vet ./...`, `go test -race ./...`, `docker build -f docker/qbittorrent.Dockerfile .`, and the spec-standard/status checks. Record command outcomes before marking delivery complete. Live qBittorrent validation is optional and read-only; the implementation's mocked tests cover controls without mutating a real service.
+
+## Amendments
+
+- **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the list tool returns `{"torrents": [...]}`. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.

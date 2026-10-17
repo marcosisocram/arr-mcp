@@ -11,9 +11,9 @@ As an MCP client operator, I want an independently deployable Go MCP for Sonarr 
 
 - FR-001: The standalone executable uses the official `github.com/modelcontextprotocol/go-sdk` and serves one Sonarr catalog over Streamable HTTP at `/mcp/sonarr`, talking to Sonarr API v3.
 - FR-002: `SONARR_URL` is required and is trusted configuration, never a tool argument; it may include an installation path prefix. `SONARR_API_KEY` is required and is sent as `X-Api-Key`. `SONARR_LISTEN_ADDR` defaults to `127.0.0.1:8080`.
-- FR-003: Tools list the library and return one series by internal ID using typed, trimmed fields, including per-season numbers and monitoring flags.
+- FR-003: Tools list the library and return one series by internal ID using typed, trimmed fields, including per-season numbers and monitoring flags. List results are wrapped in an object (`{"series": ...}`, `{"candidates": ...}`, `{"profiles": ...}`, `{"folders": ...}`) so every tool's `outputSchema` declares top-level `type: "object"`, which Python MCP SDK clients require (amended 2026-10-16, issue #8).
 - FR-004: Tools look up candidate series by term, list quality profiles, and list root folders.
-- FR-005: Tools list episodes of one explicit series with optional season scoping, and return one episode by internal ID.
+- FR-005: Tools list episodes of one explicit series with optional season scoping, and return one episode by internal ID. Episode list results are wrapped in an object (`{"episodes": ...}`, amended 2026-10-16, issue #8).
 - FR-006: `sonarr_add_series` requires a TVDB ID, a quality profile ID, and a root folder path; it never starts a search and never creates a duplicate for a TVDB ID that is already in the library.
 - FR-007: `sonarr_set_series_monitored` changes only the `monitored` flag of one explicit series and preserves every other field of that series. `sonarr_set_episode_monitored` changes only the `monitored` flag of explicit episodes.
 - FR-008: `sonarr_search_series`, `sonarr_search_season`, and `sonarr_search_episodes` post `SeriesSearch`, `SeasonSearch`, and `EpisodeSearch` commands for explicit targets, and `sonarr_get_command` reports a command's state.

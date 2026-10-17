@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/radarr-mcp ./cmd/r
 
 FROM gcr.io/distroless/static-debian13:nonroot
 COPY --from=build /out/radarr-mcp /radarr-mcp
-USER nonroot:nonroot
+USER 65532:65532
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD ["/radarr-mcp", "--healthcheck"]
 ENTRYPOINT ["/radarr-mcp"]

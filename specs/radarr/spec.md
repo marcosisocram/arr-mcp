@@ -11,7 +11,7 @@ As an MCP client operator, I want an independently deployable Go MCP for Radarr 
 
 - FR-001: The standalone executable uses the official `github.com/modelcontextprotocol/go-sdk` and serves one Radarr catalog over Streamable HTTP at `/mcp/radarr`, talking to Radarr API v3.
 - FR-002: `RADARR_URL` is required and is trusted configuration, never a tool argument; it may include an installation path prefix. `RADARR_API_KEY` is required and is sent as `X-Api-Key`. `RADARR_LISTEN_ADDR` defaults to `127.0.0.1:8080`.
-- FR-003: Tools list the library and return one movie by internal ID using typed, trimmed fields.
+- FR-003: Tools list the library and return one movie by internal ID using typed, trimmed fields. List and lookup results are wrapped in an object (`{"movies": ...}`, `{"candidates": ...}`, `{"profiles": ...}`, `{"folders": ...}`) so every tool's `outputSchema` declares top-level `type: "object"`, which Python MCP SDK clients require (amended 2026-10-16, issue #8).
 - FR-004: Tools look up candidate movies by term, list quality profiles, and list root folders.
 - FR-005: `radarr_add_movie` requires a TMDB ID, a quality profile ID, and a root folder path; it never starts a search and never creates a duplicate for a TMDB ID that is already in the library.
 - FR-006: `radarr_set_movie_monitored` changes only the `monitored` flag of one explicit movie and preserves every other field of that movie.

@@ -99,6 +99,13 @@ func TestMCPContract(t *testing.T) {
 		t.Fatalf("got %d tools, want 16", len(listed.Tools))
 	}
 	for _, tool := range listed.Tools {
+		outputSchema, err := json.Marshal(tool.OutputSchema)
+		if err != nil {
+			t.Fatalf("%s output schema is not JSON: %v", tool.Name, err)
+		}
+		if !strings.Contains(string(outputSchema), `"type":"object"`) {
+			t.Fatalf("%s output schema is not a top-level object (Python SDK clients reject it): %s", tool.Name, outputSchema)
+		}
 		if tool.Name != "sonarr_list_series" {
 			continue
 		}

@@ -27,6 +27,22 @@ type MovieIDInput struct {
 	MovieID int `json:"movie_id" jsonschema:"Internal Radarr movie ID from radarr_list_movies or radarr_add_movie."`
 }
 
+type ListMoviesOutput struct {
+	Movies []Movie `json:"movies" jsonschema:"Movies in the Radarr library."`
+}
+
+type LookupMoviesOutput struct {
+	Candidates []Movie `json:"candidates" jsonschema:"Candidate movies with TMDB identifiers."`
+}
+
+type QualityProfilesOutput struct {
+	Profiles []QualityProfile `json:"profiles" jsonschema:"Available quality profiles."`
+}
+
+type RootFoldersOutput struct {
+	Folders []RootFolder `json:"folders" jsonschema:"Available root folders."`
+}
+
 type LookupMoviesInput struct {
 	Term  string `json:"term" jsonschema:"Title search term, or an imdb:tt... or tmdb:... identifier."`
 	Limit int    `json:"limit,omitempty" jsonschema:"Maximum lookup results to return (1-50; default 20)."`
@@ -74,16 +90,16 @@ type EmptyInput struct{}
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "radarr-mcp", Version: "0.1.0"}, nil)
-	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_movies", Description: "List movies in the Radarr library with optional monitored and has-file filters and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListMoviesInput) (*mcp.CallToolResult, []Movie, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_movies", Description: "List movies in the Radarr library with optional monitored and has-file filters and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListMoviesInput) (*mcp.CallToolResult, ListMoviesOutput, error) {
 		movies, err := client.ListMovies(ctx)
 		if err != nil {
-			return nil, nil, err
+			return nil, ListMoviesOutput{}, err
 		}
 		filtered, err := movieListFilter(movies, input.Monitored, input.HasFile, input.Offset, input.Limit)
 		if err != nil {
-			return nil, nil, err
+			return nil, ListMoviesOutput{}, err
 		}
-		return nil, filtered, nil
+		return nil, ListMoviesOutput{Movies: filtered}, nil
 	})
 	mcp.AddTool(server, &mcp.Tool{Name: "radarr_get_movie", Description: "Read one movie from the Radarr library by its internal Radarr ID."}, func(ctx context.Context, _ *mcp.CallToolRequest, input MovieIDInput) (*mcp.CallToolResult, Movie, error) {
 		if input.MovieID <= 0 {
@@ -92,34 +108,34 @@ func NewMCPServer(client *Client) *mcp.Server {
 		movie, err := client.MovieByID(ctx, input.MovieID)
 		return nil, movie, err
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "radarr_lookup_movies", Description: "Search Radarr's movie metadata source for candidate movies to add; returns candidate TMDB identifiers only."}, func(ctx context.Context, _ *mcp.CallToolRequest, input LookupMoviesInput) (*mcp.CallToolResult, []Movie, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "radarr_lookup_movies", Description: "Search Radarr's movie metadata source for candidate movies to add; returns candidate TMDB identifiers only."}, func(ctx context.Context, _ *mcp.CallToolRequest, input LookupMoviesInput) (*mcp.CallToolResult, LookupMoviesOutput, error) {
 		term := strings.TrimSpace(input.Term)
 		if term == "" {
-			return nil, nil, fmt.Errorf("term is required")
+			return nil, LookupMoviesOutput{}, fmt.Errorf("term is required")
 		}
 		limit := input.Limit
 		if limit == 0 {
 			limit = 20
 		}
 		if limit < 1 || limit > 50 {
-			return nil, nil, fmt.Errorf("limit must be between 1 and 50")
+			return nil, LookupMoviesOutput{}, fmt.Errorf("limit must be between 1 and 50")
 		}
 		movies, err := client.LookupMovies(ctx, term)
 		if err != nil {
-			return nil, nil, err
+			return nil, LookupMoviesOutput{}, err
 		}
 		if len(movies) > limit {
 			movies = movies[:limit]
 		}
-		return nil, movies, nil
+		return nil, LookupMoviesOutput{Candidates: movies}, nil
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_quality_profiles", Description: "List the quality profiles available when adding a movie."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, []QualityProfile, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_quality_profiles", Description: "List the quality profiles available when adding a movie."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, QualityProfilesOutput, error) {
 		profiles, err := client.QualityProfiles(ctx)
-		return nil, profiles, err
+		return nil, QualityProfilesOutput{Profiles: profiles}, err
 	})
-	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_root_folders", Description: "List the root folders available when adding a movie."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, []RootFolder, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_root_folders", Description: "List the root folders available when adding a movie."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, RootFoldersOutput, error) {
 		folders, err := client.RootFolders(ctx)
-		return nil, folders, err
+		return nil, RootFoldersOutput{Folders: folders}, err
 	})
 	mcp.AddTool(server, &mcp.Tool{Name: "radarr_add_movie", Description: "Add one movie by TMDB ID with an explicit quality profile and root folder. Never starts a release search and never creates a duplicate."}, func(ctx context.Context, _ *mcp.CallToolRequest, input AddMovieInput) (*mcp.CallToolResult, AddMovieOutput, error) {
 		output, err := addMovie(ctx, client, input)

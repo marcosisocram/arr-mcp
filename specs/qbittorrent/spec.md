@@ -11,7 +11,7 @@ As an MCP client operator, I want an independently deployable Go MCP for qBittor
 
 - FR-001: The standalone executable uses the official `github.com/modelcontextprotocol/go-sdk` and serves one qBittorrent catalog over Streamable HTTP.
 - FR-002: `QBITTORRENT_URL` is required and is trusted configuration, never a tool argument. `QBITTORRENT_API_KEY` is preferred; otherwise both `QBITTORRENT_USERNAME` and `QBITTORRENT_PASSWORD` are required. API key auth uses `Authorization: Bearer`; password auth uses `/auth/login`, cookie reuse, and at most one re-login/retry after 401/403.
-- FR-003: Tools provide torrent listing and individual properties, with typed inputs/outputs and validation. Read responses do not expose configured credentials or session cookies.
+- FR-003: Tools provide torrent listing and individual properties, with typed inputs/outputs and validation. Listed torrents are returned wrapped in an object (`{"torrents": [...]}`) so every tool's `outputSchema` declares top-level `type: "object"`, which Python MCP SDK clients require (amended 2026-10-16, issue #8). Read responses do not expose configured credentials or session cookies.
 - FR-004: Tools provide global transfer information, upload/download limit reads, and alternative-speed mode read.
 - FR-005: Tools pause/resume only explicitly supplied torrent hashes using qBittorrent WebAPI v2 `/torrents/stop` and `/torrents/start`; an empty hash list and the `all` sentinel are rejected.
 - FR-006: Tools set upload/download limits in bytes per second (zero means unlimited) and toggle alternative-speed mode. Negative limits are rejected.

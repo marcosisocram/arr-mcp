@@ -13,9 +13,11 @@ Set `QBITTORRENT_URL` to the trusted qBittorrent WebUI base URL. Authenticate wi
 
 ## Tools
 
-Read tools: `qbittorrent_list_torrents`, `qbittorrent_torrent_properties`, `qbittorrent_transfer_info`, `qbittorrent_get_transfer_limits`, and `qbittorrent_get_speed_limits_mode`.
+Read tools: `qbittorrent_list_torrents`, `qbittorrent_torrent_properties`, `qbittorrent_transfer_info`, `qbittorrent_get_transfer_limits`, and `qbittorrent_get_speed_limits_mode`. `qbittorrent_list_torrents` returns `{"torrents": [...]}` — every tool output is a top-level object, which Python MCP SDK clients require when validating `outputSchema`.
 
 Control tools: `qbittorrent_pause_torrents`, `qbittorrent_resume_torrents`, `qbittorrent_set_transfer_limits`, and `qbittorrent_toggle_speed_limits`. Pause/resume requires explicit torrent hashes; empty selections and the `all` wildcard are rejected. Transfer limits are bytes per second; zero means unlimited.
+
+Note on upstream authentication: qBittorrent does not accept the `X-Api-Key` header used by the other *arr apps. The client authenticates with `Authorization: Bearer <api key>` (validated against qBittorrent 5.2.x) or the WebUI login flow.
 
 Adding/deleting torrents, deleting files, RSS, search, categories/tags, logs, and sync are not part of this pilot.
 
