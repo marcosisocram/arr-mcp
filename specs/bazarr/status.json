@@ -1,0 +1,149 @@
+{
+  "schema_version": 2,
+  "spec_id": "CONN-ARR-MCP-BAZARR",
+  "owner_repo": "arr-mcp",
+  "delivery_state": "VERIFIED",
+  "requirement_ids": [
+    "CONN-ARR-MCP-BAZARR-R001",
+    "CONN-ARR-MCP-BAZARR-R002",
+    "CONN-ARR-MCP-BAZARR-R003",
+    "CONN-ARR-MCP-BAZARR-R004",
+    "CONN-ARR-MCP-BAZARR-R005",
+    "CONN-ARR-MCP-BAZARR-R006",
+    "CONN-ARR-MCP-BAZARR-R007",
+    "CONN-ARR-MCP-BAZARR-R008",
+    "CONN-ARR-MCP-BAZARR-R009",
+    "CONN-ARR-MCP-BAZARR-R010",
+    "CONN-ARR-MCP-BAZARR-R011"
+  ],
+  "requirements": [
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R001",
+      "title": "Standalone server",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/mcp_test.go:14"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R002",
+      "title": "Trusted configuration and authentication",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:15",
+        "internal/bazarr/client_test.go:42",
+        "internal/bazarr/client_test.go:194"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R003",
+      "title": "System and language reads",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:42",
+        "internal/bazarr/client_test.go:64"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R004",
+      "title": "Series and movie library reads",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:64"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R005",
+      "title": "Episode and wanted reads",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:64",
+        "internal/bazarr/mcp_test.go:14"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R006",
+      "title": "Provider and history reads",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:64"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R007",
+      "title": "Explicit profile writes",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:139",
+        "internal/bazarr/mcp_test.go:14"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R008",
+      "title": "Explicit subtitle actions",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:139",
+        "internal/bazarr/mcp_test.go:14"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R009",
+      "title": "Object output schemas",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/mcp_test.go:14"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R010",
+      "title": "Bounded and sanitized HTTP",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "internal/bazarr/client_test.go:194"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R011",
+      "title": "Document and package",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "464c032"
+      ],
+      "verified_by": [
+        "docker/bazarr.Dockerfile:1",
+        "docs/bazarr-go.md:1"
+      ]
+    }
+  ]
+}
