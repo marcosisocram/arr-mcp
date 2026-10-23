@@ -14,7 +14,10 @@
     "CONN-ARR-MCP-SONARR-R008",
     "CONN-ARR-MCP-SONARR-R009",
     "CONN-ARR-MCP-SONARR-R010",
-    "CONN-ARR-MCP-SONARR-R011"
+    "CONN-ARR-MCP-SONARR-R011",
+    "CONN-ARR-MCP-SONARR-R012",
+    "CONN-ARR-MCP-SONARR-R013",
+    "CONN-ARR-MCP-SONARR-R014"
   ],
   "requirements": [
     {
@@ -150,6 +153,42 @@
         "5923774f4356"
       ],
       "verified_by": []
+    },
+    {
+      "id": "CONN-ARR-MCP-SONARR-R012",
+      "title": "Complete domain action catalog",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "internal/sonarr/mcp_test.go:209",
+        "internal/sonarr/actions.go:36"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-SONARR-R013",
+      "title": "Confirm mutations",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "internal/actiondispatch/dispatch_test.go:12",
+        "internal/sonarr/mcp_test.go:214"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-SONARR-R014",
+      "title": "Keep language parity",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "tests/test_go_action_parity.py:10",
+        "scripts/generate_go_actions.py:225"
+      ]
     }
   ]
 }
