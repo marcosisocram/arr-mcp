@@ -98,6 +98,7 @@ type ActionOutput struct {
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "bazarr-mcp", Version: "0.1.0"}, nil)
+	registerActionTool(server, client)
 	mcp.AddTool(server, &mcp.Tool{Name: "bazarr_get_status", Description: "Read Bazarr and connected Sonarr/Radarr version information. Local filesystem paths and database/runtime details are deliberately omitted."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, StatusOutput, error) {
 		status, err := client.Status(ctx)
 		return nil, StatusOutput{BazarrVersion: status.Data.BazarrVersion, PackageVersion: status.Data.PackageVersion, SonarrVersion: status.Data.SonarrVersion, RadarrVersion: status.Data.RadarrVersion}, err

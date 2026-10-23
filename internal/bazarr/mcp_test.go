@@ -79,8 +79,8 @@ func TestMCPContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(listed.Tools) != 17 {
-		t.Fatalf("got %d tools, want 17", len(listed.Tools))
+	if len(listed.Tools) != 18 {
+		t.Fatalf("got %d tools, want 18", len(listed.Tools))
 	}
 	for _, tool := range listed.Tools {
 		encoded, err := json.Marshal(tool.OutputSchema)
@@ -142,5 +142,15 @@ func TestMCPContract(t *testing.T) {
 		if err != nil || !result.IsError {
 			t.Fatalf("invalid %s input was not rejected: result=%#v err=%v", invalid.name, result, err)
 		}
+	}
+	actions := call("bazarr_action", map[string]any{"action": "list_actions"})
+	encoded, err := json.Marshal(actions.StructuredContent)
+	if actions.IsError || err != nil || !strings.Contains(string(encoded), "update_settings") || len(actionCatalog) != 25 {
+		t.Fatalf("action catalog discovery failed: %s (%v)", encoded, err)
+	}
+	unconfirmed := call("bazarr_action", map[string]any{"action": "remove_from_blacklist", "params_json": `{"blacklist_id":1}`})
+	encoded, err = json.Marshal(unconfirmed.StructuredContent)
+	if unconfirmed.IsError || err != nil || !strings.Contains(string(encoded), `"cancelled":true`) {
+		t.Fatalf("unconfirmed destructive action was not cancelled: %s (%v)", encoded, err)
 	}
 }

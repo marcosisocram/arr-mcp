@@ -1,0 +1,3417 @@
+[
+  {
+    "composite": true,
+    "name": "add_movie"
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_autotagging_id",
+    "path": "/autotagging/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_blocklist_bulk",
+    "path": "/blocklist/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_blocklist_id",
+    "path": "/blocklist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_command_id",
+    "path": "/command/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_customfilter_id",
+    "path": "/customfilter/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_customformat_bulk",
+    "path": "/customformat/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_customformat_id",
+    "path": "/customformat/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_delayprofile_id",
+    "path": "/delayprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_downloadclient_bulk",
+    "path": "/downloadclient/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_downloadclient_id",
+    "path": "/downloadclient/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_exclusions_bulk",
+    "path": "/exclusions/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_exclusions_id",
+    "path": "/exclusions/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_importlist_bulk",
+    "path": "/importlist/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_importlist_id",
+    "path": "/importlist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_indexer_bulk",
+    "path": "/indexer/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_indexer_id",
+    "path": "/indexer/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_metadata_id",
+    "path": "/metadata/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_movie_editor",
+    "path": "/movie/editor",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "addImportExclusion": null,
+      "deleteFiles": null
+    },
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_movie_id",
+    "path": "/movie/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_moviefile_bulk",
+    "path": "/moviefile/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_moviefile_id",
+    "path": "/moviefile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_notification_id",
+    "path": "/notification/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_qualityprofile_id",
+    "path": "/qualityprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "blocklist": null,
+      "changeCategory": null,
+      "removeFromClient": null,
+      "skipRedownload": null
+    },
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_queue_bulk",
+    "path": "/queue/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "blocklist": null,
+      "changeCategory": null,
+      "removeFromClient": null,
+      "skipRedownload": null
+    },
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_queue_id",
+    "path": "/queue/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_releaseprofile_id",
+    "path": "/releaseprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_remotepathmapping_id",
+    "path": "/remotepathmapping/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_rootfolder_id",
+    "path": "/rootfolder/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_system_backup_id",
+    "path": "/system/backup/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "delete_tag_id",
+    "path": "/tag/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null,
+      "movieMetadataId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_alttitle",
+    "path": "/alttitle",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_alttitle_id",
+    "path": "/alttitle/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_autotagging",
+    "path": "/autotagging",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_autotagging_id",
+    "path": "/autotagging/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_autotagging_schema",
+    "path": "/autotagging/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieIds": null,
+      "page": null,
+      "pageSize": null,
+      "protocols": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_blocklist",
+    "path": "/blocklist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_blocklist_movie",
+    "path": "/blocklist/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "end": null,
+      "start": null,
+      "tags": null,
+      "unmonitored": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_calendar",
+    "path": "/calendar",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "tmdbId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_collection",
+    "path": "/collection",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_collection_id",
+    "path": "/collection/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_command",
+    "path": "/command",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_command_id",
+    "path": "/command/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_downloadclient",
+    "path": "/config/downloadclient",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_downloadclient_id",
+    "path": "/config/downloadclient/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_host",
+    "path": "/config/host",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_host_id",
+    "path": "/config/host/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_importlist",
+    "path": "/config/importlist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_importlist_id",
+    "path": "/config/importlist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_indexer",
+    "path": "/config/indexer",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_indexer_id",
+    "path": "/config/indexer/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_mediamanagement",
+    "path": "/config/mediamanagement",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_mediamanagement_id",
+    "path": "/config/mediamanagement/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_metadata",
+    "path": "/config/metadata",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_metadata_id",
+    "path": "/config/metadata/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_naming",
+    "path": "/config/naming",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "colonReplacementFormat": null,
+      "id": null,
+      "movieFolderFormat": null,
+      "renameMovies": null,
+      "replaceIllegalCharacters": null,
+      "resourceName": null,
+      "standardMovieFormat": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_naming_examples",
+    "path": "/config/naming/examples",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_naming_id",
+    "path": "/config/naming/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_ui",
+    "path": "/config/ui",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_config_ui_id",
+    "path": "/config/ui/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null,
+      "movieMetadataId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_credit",
+    "path": "/credit",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_credit_id",
+    "path": "/credit/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_customfilter",
+    "path": "/customfilter",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_customfilter_id",
+    "path": "/customfilter/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_customformat",
+    "path": "/customformat",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_customformat_id",
+    "path": "/customformat/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_customformat_schema",
+    "path": "/customformat/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_delayprofile",
+    "path": "/delayprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_delayprofile_id",
+    "path": "/delayprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_diskspace",
+    "path": "/diskspace",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_downloadclient",
+    "path": "/downloadclient",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_downloadclient_id",
+    "path": "/downloadclient/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_downloadclient_schema",
+    "path": "/downloadclient/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_exclusions",
+    "path": "/exclusions",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_exclusions_id",
+    "path": "/exclusions/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": null,
+      "pageSize": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_exclusions_paged",
+    "path": "/exclusions/paged",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_extrafile",
+    "path": "/extrafile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "allowFoldersWithoutTrailingSlashes": null,
+      "includeFiles": null,
+      "path": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_filesystem",
+    "path": "/filesystem",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "path": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_filesystem_mediafiles",
+    "path": "/filesystem/mediafiles",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "path": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_filesystem_type",
+    "path": "/filesystem/type",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_health",
+    "path": "/health",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "downloadId": null,
+      "eventType": null,
+      "includeMovie": null,
+      "languages": null,
+      "movieIds": null,
+      "page": null,
+      "pageSize": null,
+      "quality": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_history",
+    "path": "/history",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "eventType": null,
+      "includeMovie": null,
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_history_movie",
+    "path": "/history/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "date": null,
+      "eventType": null,
+      "includeMovie": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_history_since",
+    "path": "/history/since",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_importlist",
+    "path": "/importlist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_importlist_id",
+    "path": "/importlist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "includePopular": null,
+      "includeRecommendations": null,
+      "includeTrending": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_importlist_movie",
+    "path": "/importlist/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_importlist_schema",
+    "path": "/importlist/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_indexer",
+    "path": "/indexer",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_indexer_id",
+    "path": "/indexer/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_indexer_schema",
+    "path": "/indexer/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_indexerflag",
+    "path": "/indexerflag",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_language",
+    "path": "/language",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_language_id",
+    "path": "/language/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_localization",
+    "path": "/localization",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_localization_language",
+    "path": "/localization/language",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "level": null,
+      "page": null,
+      "pageSize": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_log",
+    "path": "/log",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_log_file",
+    "path": "/log/file",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_log_file_filename",
+    "path": "/log/file/{filename}",
+    "path_params": [
+      "filename"
+    ],
+    "query_params": {},
+    "required_params": [
+      "filename"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_log_file_update",
+    "path": "/log/file/update",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_log_file_update_filename",
+    "path": "/log/file/update/{filename}",
+    "path_params": [
+      "filename"
+    ],
+    "query_params": {},
+    "required_params": [
+      "filename"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "downloadId": null,
+      "filterExistingFiles": null,
+      "folder": null,
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_manualimport",
+    "path": "/manualimport",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_mediacover_movie_id_filename",
+    "path": "/mediacover/{movieId}/{filename}",
+    "path_params": [
+      "movieId",
+      "filename"
+    ],
+    "query_params": {},
+    "required_params": [
+      "movieId",
+      "filename"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_metadata",
+    "path": "/metadata",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_metadata_id",
+    "path": "/metadata/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_metadata_schema",
+    "path": "/metadata/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "excludeLocalCovers": null,
+      "languageId": null,
+      "tmdbId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie",
+    "path": "/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_id",
+    "path": "/movie/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_id_folder",
+    "path": "/movie/{id}/folder",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "term": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_lookup",
+    "path": "/movie/lookup",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "imdbId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_lookup_imdb",
+    "path": "/movie/lookup/imdb",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "tmdbId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_lookup_tmdb",
+    "path": "/movie/lookup/tmdb",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieFileIds": null,
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_moviefile",
+    "path": "/moviefile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_moviefile_id",
+    "path": "/moviefile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_notification",
+    "path": "/notification",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_notification_id",
+    "path": "/notification/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_notification_schema",
+    "path": "/notification/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "title": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_parse",
+    "path": "/parse",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualitydefinition",
+    "path": "/qualitydefinition",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualitydefinition_id",
+    "path": "/qualitydefinition/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualitydefinition_limits",
+    "path": "/qualitydefinition/limits",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualityprofile",
+    "path": "/qualityprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualityprofile_id",
+    "path": "/qualityprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_qualityprofile_schema",
+    "path": "/qualityprofile/schema",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "includeMovie": null,
+      "includeUnknownMovieItems": null,
+      "languages": null,
+      "movieIds": null,
+      "page": null,
+      "pageSize": null,
+      "protocol": null,
+      "quality": null,
+      "sortDirection": null,
+      "sortKey": null,
+      "status": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_queue",
+    "path": "/queue",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "includeMovie": null,
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_queue_details",
+    "path": "/queue/details",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_queue_status",
+    "path": "/queue/status",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_release",
+    "path": "/release",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_releaseprofile",
+    "path": "/releaseprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_releaseprofile_id",
+    "path": "/releaseprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_remotepathmapping",
+    "path": "/remotepathmapping",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_remotepathmapping_id",
+    "path": "/remotepathmapping/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "movieId": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_rename",
+    "path": "/rename",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_rootfolder",
+    "path": "/rootfolder",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_rootfolder_id",
+    "path": "/rootfolder/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_backup",
+    "path": "/system/backup",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_routes",
+    "path": "/system/routes",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_routes_duplicate",
+    "path": "/system/routes/duplicate",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_status",
+    "path": "/system/status",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_task",
+    "path": "/system/task",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_task_id",
+    "path": "/system/task/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_tag",
+    "path": "/tag",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_tag_detail",
+    "path": "/tag/detail",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_tag_detail_id",
+    "path": "/tag/detail/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_tag_id",
+    "path": "/tag/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_update",
+    "path": "/update",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "monitored": null,
+      "page": null,
+      "pageSize": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_wanted_cutoff",
+    "path": "/wanted/cutoff",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "monitored": null,
+      "page": null,
+      "pageSize": null,
+      "sortDirection": null,
+      "sortKey": null
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_wanted_missing",
+    "path": "/wanted/missing",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "composite": true,
+    "name": "lookup_movie"
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_autotagging",
+    "path": "/autotagging",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_command",
+    "path": "/command",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_customfilter",
+    "path": "/customfilter",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_customformat",
+    "path": "/customformat",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_delayprofile",
+    "path": "/delayprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_downloadclient",
+    "path": "/downloadclient",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_downloadclient_action_name",
+    "path": "/downloadclient/action/{name}",
+    "path_params": [
+      "name"
+    ],
+    "query_params": {},
+    "required_params": [
+      "name",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceTest": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_downloadclient_test",
+    "path": "/downloadclient/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_downloadclient_testall",
+    "path": "/downloadclient/testall",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_exclusions",
+    "path": "/exclusions",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_exclusions_bulk",
+    "path": "/exclusions/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_history_failed_id",
+    "path": "/history/failed/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_importlist",
+    "path": "/importlist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_importlist_action_name",
+    "path": "/importlist/action/{name}",
+    "path_params": [
+      "name"
+    ],
+    "query_params": {},
+    "required_params": [
+      "name",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_importlist_movie",
+    "path": "/importlist/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceTest": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_importlist_test",
+    "path": "/importlist/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_importlist_testall",
+    "path": "/importlist/testall",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_indexer",
+    "path": "/indexer",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_indexer_action_name",
+    "path": "/indexer/action/{name}",
+    "path_params": [
+      "name"
+    ],
+    "query_params": {},
+    "required_params": [
+      "name",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceTest": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_indexer_test",
+    "path": "/indexer/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_indexer_testall",
+    "path": "/indexer/testall",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_manualimport",
+    "path": "/manualimport",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_metadata",
+    "path": "/metadata",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_metadata_action_name",
+    "path": "/metadata/action/{name}",
+    "path_params": [
+      "name"
+    ],
+    "query_params": {},
+    "required_params": [
+      "name",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceTest": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_metadata_test",
+    "path": "/metadata/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_metadata_testall",
+    "path": "/metadata/testall",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_movie",
+    "path": "/movie",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_movie_import",
+    "path": "/movie/import",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_notification",
+    "path": "/notification",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_notification_action_name",
+    "path": "/notification/action/{name}",
+    "path_params": [
+      "name"
+    ],
+    "query_params": {},
+    "required_params": [
+      "name",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceTest": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "post_notification_test",
+    "path": "/notification/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_notification_testall",
+    "path": "/notification/testall",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_qualityprofile",
+    "path": "/qualityprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_queue_grab_bulk",
+    "path": "/queue/grab/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_queue_grab_id",
+    "path": "/queue/grab/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_release",
+    "path": "/release",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_release_push",
+    "path": "/release/push",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_releaseprofile",
+    "path": "/releaseprofile",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_remotepathmapping",
+    "path": "/remotepathmapping",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_rootfolder",
+    "path": "/rootfolder",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_system_backup_restore_id",
+    "path": "/system/backup/restore/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_system_backup_restore_upload",
+    "path": "/system/backup/restore/upload",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_system_restart",
+    "path": "/system/restart",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_system_shutdown",
+    "path": "/system/shutdown",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "post_tag",
+    "path": "/tag",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_autotagging_id",
+    "path": "/autotagging/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_collection",
+    "path": "/collection",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_collection_id",
+    "path": "/collection/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_downloadclient_id",
+    "path": "/config/downloadclient/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_host_id",
+    "path": "/config/host/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_importlist_id",
+    "path": "/config/importlist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_indexer_id",
+    "path": "/config/indexer/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_mediamanagement_id",
+    "path": "/config/mediamanagement/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_metadata_id",
+    "path": "/config/metadata/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_naming_id",
+    "path": "/config/naming/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_config_ui_id",
+    "path": "/config/ui/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_customfilter_id",
+    "path": "/customfilter/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_customformat_bulk",
+    "path": "/customformat/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_customformat_id",
+    "path": "/customformat/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_delayprofile_id",
+    "path": "/delayprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "after": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_delayprofile_reorder_id",
+    "path": "/delayprofile/reorder/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_downloadclient_bulk",
+    "path": "/downloadclient/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_downloadclient_id",
+    "path": "/downloadclient/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_exclusions_id",
+    "path": "/exclusions/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_importlist_bulk",
+    "path": "/importlist/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_importlist_id",
+    "path": "/importlist/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_indexer_bulk",
+    "path": "/indexer/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_indexer_id",
+    "path": "/indexer/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_metadata_id",
+    "path": "/metadata/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_movie_editor",
+    "path": "/movie/editor",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "moveFiles": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_movie_id",
+    "path": "/movie/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_moviefile_bulk",
+    "path": "/moviefile/bulk",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_moviefile_editor",
+    "path": "/moviefile/editor",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_moviefile_id",
+    "path": "/moviefile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {
+      "forceSave": null
+    },
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_notification_id",
+    "path": "/notification/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_qualitydefinition_id",
+    "path": "/qualitydefinition/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_qualitydefinition_update",
+    "path": "/qualitydefinition/update",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_qualityprofile_id",
+    "path": "/qualityprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_releaseprofile_id",
+    "path": "/releaseprofile/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_remotepathmapping_id",
+    "path": "/remotepathmapping/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  },
+  {
+    "body_direct": "data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "PUT",
+    "name": "put_tag_id",
+    "path": "/tag/{id}",
+    "path_params": [
+      "id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "id",
+      "data"
+    ]
+  }
+]

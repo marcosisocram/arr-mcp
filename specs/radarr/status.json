@@ -13,7 +13,10 @@
     "CONN-ARR-MCP-RADARR-R007",
     "CONN-ARR-MCP-RADARR-R008",
     "CONN-ARR-MCP-RADARR-R009",
-    "CONN-ARR-MCP-RADARR-R010"
+    "CONN-ARR-MCP-RADARR-R010",
+    "CONN-ARR-MCP-RADARR-R011",
+    "CONN-ARR-MCP-RADARR-R012",
+    "CONN-ARR-MCP-RADARR-R013"
   ],
   "requirements": [
     {
@@ -137,6 +140,42 @@
         "3ad35987eeb0"
       ],
       "verified_by": []
+    },
+    {
+      "id": "CONN-ARR-MCP-RADARR-R011",
+      "title": "Complete domain action catalog",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "internal/radarr/mcp_test.go:184",
+        "internal/radarr/actions.go:36"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-RADARR-R012",
+      "title": "Confirm mutations",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "internal/actiondispatch/dispatch_test.go:12",
+        "internal/radarr/mcp_test.go:189"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-RADARR-R013",
+      "title": "Keep language parity",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "ce2f4d3"
+      ],
+      "verified_by": [
+        "tests/test_go_action_parity.py:10",
+        "scripts/generate_go_actions.py:225"
+      ]
     }
   ]
 }

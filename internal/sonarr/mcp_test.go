@@ -95,8 +95,8 @@ func TestMCPContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(listed.Tools) != 16 {
-		t.Fatalf("got %d tools, want 16", len(listed.Tools))
+	if len(listed.Tools) != 17 {
+		t.Fatalf("got %d tools, want 17", len(listed.Tools))
 	}
 	for _, tool := range listed.Tools {
 		outputSchema, err := json.Marshal(tool.OutputSchema)
@@ -205,5 +205,15 @@ func TestMCPContract(t *testing.T) {
 	invalid = call("sonarr_get_queue", map[string]any{"page_size": 1000})
 	if !invalid.IsError {
 		t.Fatal("oversized page_size should be rejected as a tool error")
+	}
+	actions := call("sonarr_action", map[string]any{"action": "list_actions"})
+	encoded, err = json.Marshal(actions.StructuredContent)
+	if actions.IsError || err != nil || !strings.Contains(string(encoded), "add_series") || len(actionCatalog) != 227 {
+		t.Fatalf("action catalog discovery failed: %s (%v)", encoded, err)
+	}
+	unconfirmed := call("sonarr_action", map[string]any{"action": "delete_series_id", "params_json": `{"id":1}`})
+	encoded, err = json.Marshal(unconfirmed.StructuredContent)
+	if unconfirmed.IsError || err != nil || !strings.Contains(string(encoded), `"cancelled":true`) {
+		t.Fatalf("unconfirmed destructive action was not cancelled: %s (%v)", encoded, err)
 	}
 }
