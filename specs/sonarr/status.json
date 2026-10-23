@@ -17,7 +17,8 @@
     "CONN-ARR-MCP-SONARR-R011",
     "CONN-ARR-MCP-SONARR-R012",
     "CONN-ARR-MCP-SONARR-R013",
-    "CONN-ARR-MCP-SONARR-R014"
+    "CONN-ARR-MCP-SONARR-R014",
+    "CONN-ARR-MCP-SONARR-R015"
   ],
   "requirements": [
     {
@@ -188,6 +189,18 @@
       "verified_by": [
         "tests/test_go_action_parity.py:10",
         "scripts/generate_go_actions.py:225"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-SONARR-R015",
+      "title": "Hermes-compatible action schema",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "346f61f"
+      ],
+      "verified_by": [
+        "internal/sonarr/mcp_test.go:101",
+        "internal/actiondispatch/dispatch.go:55"
       ]
     }
   ]

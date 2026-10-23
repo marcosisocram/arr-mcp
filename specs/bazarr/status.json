@@ -17,7 +17,8 @@
     "CONN-ARR-MCP-BAZARR-R011",
     "CONN-ARR-MCP-BAZARR-R012",
     "CONN-ARR-MCP-BAZARR-R013",
-    "CONN-ARR-MCP-BAZARR-R014"
+    "CONN-ARR-MCP-BAZARR-R014",
+    "CONN-ARR-MCP-BAZARR-R015"
   ],
   "requirements": [
     {
@@ -182,6 +183,18 @@
       "verified_by": [
         "tests/test_go_action_parity.py:10",
         "scripts/generate_go_actions.py:225"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-BAZARR-R015",
+      "title": "Hermes-compatible action schema",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "346f61f"
+      ],
+      "verified_by": [
+        "internal/bazarr/mcp_test.go:85",
+        "internal/actiondispatch/dispatch.go:55"
       ]
     }
   ]

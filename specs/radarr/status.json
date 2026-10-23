@@ -16,7 +16,8 @@
     "CONN-ARR-MCP-RADARR-R010",
     "CONN-ARR-MCP-RADARR-R011",
     "CONN-ARR-MCP-RADARR-R012",
-    "CONN-ARR-MCP-RADARR-R013"
+    "CONN-ARR-MCP-RADARR-R013",
+    "CONN-ARR-MCP-RADARR-R014"
   ],
   "requirements": [
     {
@@ -175,6 +176,18 @@
       "verified_by": [
         "tests/test_go_action_parity.py:10",
         "scripts/generate_go_actions.py:225"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-RADARR-R014",
+      "title": "Hermes-compatible action schema",
+      "delivery_state": "VERIFIED",
+      "landed_in": [
+        "346f61f"
+      ],
+      "verified_by": [
+        "internal/radarr/mcp_test.go:95",
+        "internal/actiondispatch/dispatch.go:55"
       ]
     }
   ]

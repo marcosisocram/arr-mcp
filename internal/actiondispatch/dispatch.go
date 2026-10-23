@@ -9,6 +9,8 @@ import (
 	"net/url"
 	"sort"
 	"strings"
+
+	"github.com/google/jsonschema-go/jsonschema"
 )
 
 const maxInputBytes = 64 << 10
@@ -46,6 +48,29 @@ type Result struct {
 	Operation string   `json:"operation,omitempty"`
 	Actions   []string `json:"actions,omitempty"`
 	Service   string   `json:"service,omitempty"`
+}
+
+// OutputSchema describes the fixed action envelope while allowing result to
+// contain any JSON value using an object-form schema accepted by strict clients.
+func OutputSchema() *jsonschema.Schema {
+	return &jsonschema.Schema{
+		Type: "object",
+		Properties: map[string]*jsonschema.Schema{
+			"result": {AnyOf: []*jsonschema.Schema{
+				{Type: "object"},
+				{Type: "array"},
+				{Type: "string"},
+				{Type: "number"},
+				{Type: "integer"},
+				{Type: "boolean"},
+				{Type: "null"},
+			}},
+			"cancelled": {Type: "boolean"},
+			"operation": {Type: "string"},
+			"actions":   {Type: "array", Items: &jsonschema.Schema{Type: "string"}},
+			"service":   {Type: "string"},
+		},
+	}
 }
 
 type RequestFunc func(context.Context, string, string, url.Values, any) ([]byte, error)

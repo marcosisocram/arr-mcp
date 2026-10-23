@@ -34,7 +34,7 @@ type ActionInput struct {
 }
 
 func registerActionTool(server *mcp.Server, client *Client) {
-	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_action", Description: "Execute one allowlisted Sonarr domain API action. Use action=list_actions to discover actions. Mutating actions require confirm=true."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ActionInput) (*mcp.CallToolResult, actiondispatch.Result, error) {
+	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_action", Description: "Execute one allowlisted Sonarr domain API action. Use action=list_actions to discover actions. Mutating actions require confirm=true.", OutputSchema: actiondispatch.OutputSchema()}, func(ctx context.Context, _ *mcp.CallToolRequest, input ActionInput) (*mcp.CallToolResult, actiondispatch.Result, error) {
 		result, err := dispatchAction(ctx, client, input)
 		return nil, result, err
 	})
