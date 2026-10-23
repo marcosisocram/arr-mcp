@@ -17,6 +17,10 @@ As an MCP client operator, I want an independently deployable Go MCP for qBittor
 - FR-006: Tools set upload/download limits in bytes per second (zero means unlimited) and toggle alternative-speed mode. Negative limits are rejected.
 - FR-007: All outbound requests use bounded timeouts and caller cancellation; TLS verification remains enabled by default. Errors identify operation/status without including credentials, auth response bodies, or request headers.
 - FR-008: Provide offline mocked tests, operator documentation, and a non-root multi-stage Docker image. Do not change or remove the Python server.
+- FR-009: Provide bounded typed reads for torrent files, trackers, peers, categories, tags, app/WebAPI versions, and an allowlisted server-state snapshot. Validate torrent hashes; cap file and peer lists and report truncation.
+- FR-010: Provide explicit torrent removal through `/torrents/delete`; require `confirm=true`, accept 1–100 valid hashes only, reject wildcard/empty/invalid lists, and default `delete_files` to false. Without confirmation, return cancellation without an upstream request.
+- FR-011: Tracker URLs returned to callers redact URL userinfo and values of sensitive query parameters. Server-state responses expose only an explicit field allowlist.
+- FR-012: Update operator docs and mocked client/MCP contract tests for the expanded catalog; every tool output remains a top-level object.
 - SC-001: `go test ./...` passes and proves initialization, tool discovery, representative read/control calls, auth modes, validation, and sanitized errors without a live qBittorrent instance.
 - SC-002: The qBittorrent executable can be built and run independently and is containerized with no Python package/runtime.
 
@@ -26,11 +30,11 @@ Read `specs/README.md` and the local templates. The index states that no local c
 
 ## Scope and interfaces
 
-The first release covers list/details/properties, transfer info and limits, alternative-speed mode, pause/resume by explicit hash, and setting global limits. Proposed tool names: `qbittorrent_list_torrents`, `qbittorrent_torrent_properties`, `qbittorrent_transfer_info`, `qbittorrent_get_transfer_limits`, `qbittorrent_get_speed_limits_mode`, `qbittorrent_pause_torrents`, `qbittorrent_resume_torrents`, `qbittorrent_set_transfer_limits`, and `qbittorrent_toggle_speed_limits`.
+The release covers the existing nine tools plus `qbittorrent_list_torrent_files`, `qbittorrent_list_torrent_trackers`, `qbittorrent_list_torrent_peers`, `qbittorrent_list_categories`, `qbittorrent_list_tags`, `qbittorrent_app_version`, `qbittorrent_server_state`, and `qbittorrent_delete_torrents`.
 
 Configuration: `QBITTORRENT_URL`, optional `QBITTORRENT_API_KEY`, or `QBITTORRENT_USERNAME` plus `QBITTORRENT_PASSWORD`; `QBITTORRENT_LISTEN_ADDR` defaults to `127.0.0.1:8080`. The server is exposed at `/mcp/qbittorrent`. qBittorrent API key support requires qBittorrent 5.2.0 / WebAPI 2.14.1; username/password is the compatibility path. Minimum server/API version for the complete tool set must be confirmed in integration validation.
 
-Explicit non-goals: adding/deleting torrents, deleting files, categories/tags, RSS, search, logs, sync, Arr server integration, aggregate host, Kubernetes manifests, OAuth/input authentication, and Python migration/removal. HTTP deployments must be protected by a trusted TLS/auth proxy; route separation is not a security boundary.
+Explicit non-goals: adding torrents, deleting files from disk by default, RSS, search, logs, full/incremental sync, per-torrent limits, recheck/reannounce, Arr server integration, aggregate host, Kubernetes manifests, OAuth/input authentication, and Python migration/removal. HTTP deployments must be protected by a trusted TLS/auth proxy; route separation is not a security boundary.
 
 ## Traceability
 
@@ -44,6 +48,10 @@ Explicit non-goals: adding/deleting torrents, deleting files, categories/tags, R
 | FR-006 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-007 | |
 | FR-007 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-008 | |
 | FR-008 | [Quality and release gates](plan.md#quality-and-release-gates) | T-009 | |
+| FR-009 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-010 | |
+| FR-010 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-011 | |
+| FR-011 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-010, T-012 | |
+| FR-012 | [Quality and release gates](plan.md#quality-and-release-gates) | T-009–T-012 | |
 
 ## Open questions
 

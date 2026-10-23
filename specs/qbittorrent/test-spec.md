@@ -13,10 +13,13 @@ Governing spec: [spec.md](spec.md).
 | T-007 | FR-006 | HTTP/tool contract | Set limits at zero and positive values, then negative values; toggle alt speed. | Correct API form values; negative limits rejected; toggle endpoint called. | |
 | T-008 | FR-007 | Unit | Mock timeout, cancellation, TLS client, and upstream 401/500 with secret-bearing body. | Cancellation honored; TLS verification not disabled; safe operation/status error contains no secret or body. | |
 | T-009 | FR-008 | Build/package | Run Go gates and build Docker image. | Go checks pass; container builds and runs non-root without Python. | |
+| T-010 | FR-009, FR-011 | HTTP/tool contract | Mock files, trackers, peers, categories, tags, version, and sync endpoints including oversized lists and sensitive tracker/server-state data. | Typed wrappers decode correctly; limits/truncation apply; tracker secrets are redacted; only allowlisted state fields are returned. | |
+| T-011 | FR-010 | HTTP/tool contract | Invoke deletion with missing/false/true confirmation, invalid hashes, and `delete_files` omitted/true. | Unconfirmed calls are cancelled without upstream requests; confirmed calls send only validated hashes and the correct `deleteFiles` value. | |
+| T-012 | FR-012 | Contract | List and invoke the expanded MCP catalog. | Exactly 17 tools are discoverable and every output schema is a top-level object. | |
 
 ## Negative and boundary cases
 
-Cover malformed upstream URL, invalid auth combinations, unsafe hash/filter values, empty hash arrays, wildcard `all`, negative limits, oversized responses, timeout/cancellation, login denial, repeated unauthorized response, and upstream errors containing credentials. No live instance is required for the default suite.
+Cover malformed upstream URL, invalid auth combinations, unsafe hash/filter values, empty/oversized hash arrays, wildcard `all`, negative limits, list truncation, oversized responses, tracker userinfo/query secrets, non-allowlisted server state, timeout/cancellation, login denial, repeated unauthorized response, and upstream errors containing credentials. No live instance is required for the default suite.
 
 ## Quality and release proof
 
@@ -25,3 +28,4 @@ Run `go test ./...`, `go vet ./...`, `go test -race ./...`, `docker build -f doc
 ## Amendments
 
 - **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the list tool returns `{"torrents": [...]}`. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.
+- **2026-10-22:** Added T-010–T-012 for the expanded read catalog, secret redaction, and confirmed deletion. `go test ./...`, `go vet ./...`, `go test -race ./...`, gofmt, and the qBittorrent Docker build pass. `pipelines-hook` is unavailable in this environment; no live instance or registry push was exercised.

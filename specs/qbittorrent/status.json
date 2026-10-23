@@ -11,7 +11,11 @@
     "CONN-ARR-MCP-R005",
     "CONN-ARR-MCP-R006",
     "CONN-ARR-MCP-R007",
-    "CONN-ARR-MCP-R008"
+    "CONN-ARR-MCP-R008",
+    "CONN-ARR-MCP-R009",
+    "CONN-ARR-MCP-R010",
+    "CONN-ARR-MCP-R011",
+    "CONN-ARR-MCP-R012"
   ],
   "requirements": [
     {
@@ -110,6 +114,47 @@
       ],
       "verified_by": [
         "internal/qbittorrent/mcp_test.go:13"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R009",
+      "title": "Read torrent and server details",
+      "delivery_state": "VERIFIED",
+      "landed_in": ["6425d39"],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:196",
+        "internal/qbittorrent/client_test.go:298",
+        "internal/qbittorrent/mcp_test.go:15"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R010",
+      "title": "Remove torrents explicitly",
+      "delivery_state": "VERIFIED",
+      "landed_in": ["6425d39"],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:277",
+        "internal/qbittorrent/mcp_test.go:15"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R011",
+      "title": "Protect sensitive read data",
+      "delivery_state": "VERIFIED",
+      "landed_in": ["6425d39"],
+      "verified_by": [
+        "internal/qbittorrent/client_test.go:196",
+        "internal/qbittorrent/mcp_test.go:15"
+      ]
+    },
+    {
+      "id": "CONN-ARR-MCP-R012",
+      "title": "Document and contract-test expanded catalog",
+      "delivery_state": "VERIFIED",
+      "landed_in": ["6425d39"],
+      "verified_by": [
+        "internal/qbittorrent/mcp_test.go:15",
+        "docs/qbittorrent-go.md"
       ]
     }
   ]
