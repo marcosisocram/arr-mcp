@@ -90,6 +90,7 @@ type EmptyInput struct{}
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "radarr-mcp", Version: "0.1.0"}, nil)
+	registerActionTool(server, client)
 	mcp.AddTool(server, &mcp.Tool{Name: "radarr_list_movies", Description: "List movies in the Radarr library with optional monitored and has-file filters and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListMoviesInput) (*mcp.CallToolResult, ListMoviesOutput, error) {
 		movies, err := client.ListMovies(ctx)
 		if err != nil {

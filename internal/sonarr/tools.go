@@ -129,6 +129,7 @@ type EmptyInput struct{}
 
 func NewMCPServer(client *Client) *mcp.Server {
 	server := mcp.NewServer(&mcp.Implementation{Name: "sonarr-mcp", Version: "0.1.0"}, nil)
+	registerActionTool(server, client)
 	mcp.AddTool(server, &mcp.Tool{Name: "sonarr_list_series", Description: "List series in the Sonarr library with an optional monitored filter and local paging."}, func(ctx context.Context, _ *mcp.CallToolRequest, input ListSeriesInput) (*mcp.CallToolResult, ListSeriesOutput, error) {
 		library, err := client.ListSeries(ctx)
 		if err != nil {

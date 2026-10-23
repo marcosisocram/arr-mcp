@@ -14,3 +14,6 @@ Governing spec: [spec.md](spec.md). Design: [plan.md](plan.md). Rows: [requireme
 - [x] **CONN-ARR-MCP-SONARR-R010:** Bound and sanitize requests; prove cancellation, TLS default, redirect refusal, and secret redaction.
 - [x] **CONN-ARR-MCP-SONARR-R011:** Add docs and a non-root Docker image; build the image successfully.
 - [x] Run the Go gates, Docker build, and container behavior checks; regenerate `status.json`.
+- [x] **CONN-ARR-MCP-SONARR-R012:** Generate and embed the complete Sonarr domain action catalog; add `sonarr_action` while retaining typed tools.
+- [x] **CONN-ARR-MCP-SONARR-R013:** Require explicit confirmation for mutating/destructive catalog actions and prove no request is sent without it.
+- [x] **CONN-ARR-MCP-SONARR-R014:** Add AST-based action generation and Python/Go parity tests; reject unsupported method shapes.

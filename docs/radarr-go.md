@@ -20,7 +20,11 @@ A typical flow is `radarr_lookup_movies` → `radarr_list_quality_profiles` + `r
 
 `radarr_add_movie` requires `tmdb_id`, `quality_profile_id`, and `root_folder_path`; there are no silent defaults for those. It never starts a release search and returns `already_exists` without writing when the TMDB ID is already in the library. `radarr_set_movie_monitored` changes only the `monitored` flag of one movie. `radarr_search_movie` asks Radarr to search indexers for one explicit movie and can start a download; it returns a command ID that `radarr_get_command` tracks.
 
-Errors report the operation and HTTP status only, never the API key or the upstream response body. Removing movies or files, manual import, config/indexer/download-client editing, backups, and generic administrative commands are not part of this integration.
+Errors report the operation and HTTP status only, never the API key or the upstream response body. In addition to the guided typed tools, `radarr_action` exposes all 230 supported Radarr Python-client domain actions. Discover names with `{"action":"list_actions"}`; pass the Python method's argument names and values in `params_json`, for example `{"action":"get_movie","params_json":"{\"movieId\":42}"}`. Results use an object envelope (`result`).
+
+All write verbs (POST, PUT, PATCH, DELETE) through `radarr_action` require the tool argument `confirm: true`; without it the tool returns `cancelled` and sends no request. For example, `delete_movie_id` requires `params_json={"id":42}` and `confirm=true`. The composite `lookup_movie` and `add_movie` actions are available through the same router; `add_movie` requires confirmation because Python's default can start a release search. Credential-like fields in routed responses are redacted.
+
+The action catalog intentionally excludes only the HTTP helper and UI/non-domain methods: `request`, `get_api`, login/logout, the `.ics` calendar feed, `/ping`, and generic root/content paths (`get_ping`, `get_content_path`, `get_`, `get_path`). These exclusions are asserted by the Python/Go parity test.
 
 ## Run locally
 

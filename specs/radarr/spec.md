@@ -21,6 +21,9 @@ As an MCP client operator, I want an independently deployable Go MCP for Radarr 
 - FR-010: Provide offline mocked tests, operator documentation, and a non-root multi-stage Docker image. Do not change or remove the Python server.
 - SC-001: `go test ./...`, `go vet ./...`, and `go test -race ./...` pass and prove initialization, catalog discovery, read/add/monitor/search calls, validation, and sanitized errors without a live Radarr instance.
 - SC-002: The Radarr executable builds and runs independently and is containerized with no Python package or runtime.
+- FR-011: `radarr_action` exposes every public Radarr domain action implemented by the Python API client, except its HTTP helper and explicitly excluded UI endpoints. `action="list_actions"` discovers the catalog; existing typed tools remain available. Credential-like fields in routed results are redacted.
+- FR-012: Mutating or destructive actions invoked through `radarr_action` require `confirm=true`; without it, the tool returns a cancellation result and makes no upstream request. All requests retain FR-009 security bounds.
+- FR-013: A parity test derives the expected catalog from the Python client and fails on additions, removals, or renames not reflected in Go. The generator rejects unsupported method bodies rather than silently omitting actions.
 
 ## Why a new spec
 
@@ -28,11 +31,11 @@ As an MCP client operator, I want an independently deployable Go MCP for Radarr 
 
 ## Scope and interfaces
 
-The first release covers library reads, TMDB lookup, add, monitoring, release search, command tracking, and queue/history reads. Proposed tool names: `radarr_list_movies`, `radarr_get_movie`, `radarr_lookup_movies`, `radarr_list_quality_profiles`, `radarr_list_root_folders`, `radarr_add_movie`, `radarr_set_movie_monitored`, `radarr_search_movie`, `radarr_get_command`, `radarr_get_queue`, and `radarr_get_history`.
+The guided typed tools cover library reads, TMDB lookup, add, monitoring, release search, command tracking, and queue/history reads. `radarr_action` additionally routes all 230 Python API-client domain actions; `action="list_actions"` discovers the catalog. Names and argument spellings follow the Python client. Its `lookup_movie` and `add_movie` composites are routed with explicit confirmation on add.
 
 Configuration: `RADARR_URL`, `RADARR_API_KEY`, and `RADARR_LISTEN_ADDR` (default `127.0.0.1:8080`). The server is exposed at `/mcp/radarr`. Validation target: the operator's Radarr `6.4.4.10685-ls321` through `/api/v3`; API v3 does not itself identify the application version, so other releases stay unverified until tested.
 
-Explicit non-goals: removing movies or files, manual import, editing indexers/download clients/config, backups, generic administrative or destructive commands that are not a movie release search, alternate transports (stdio), the aggregate host, Kubernetes manifests, Compose examples, inbound authentication, and Python migration/removal. HTTP deployments must be protected by a trusted TLS/access-control proxy; route separation is not a security boundary.
+Explicit non-goals: login/logout and UI-only endpoints (`/api`, calendar `.ics` feed), alternate transports (stdio), the aggregate host, Kubernetes manifests, Compose examples, inbound authentication, and Python migration/removal. Domain actions including removal, manual import, indexer/download-client/configuration, backup, and administration are in scope but mutations require explicit confirmation. HTTP deployments must be protected by a trusted TLS/access-control proxy; route separation is not a security boundary.
 
 ## Traceability
 
@@ -48,6 +51,13 @@ Explicit non-goals: removing movies or files, manual import, editing indexers/do
 | FR-008 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-008 | `TestSearchQueueAndHistory`, `TestToolValidation` ok at `3ad3598`. |
 | FR-009 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-009 | `TestCancellationAndTLSDefaults`, `TestNoRedirectLeaksAPIKey` ok at `3ad3598`. |
 | FR-010 | [Quality and release gates](plan.md#quality-and-release-gates) | T-010 | `docker build -f docker/radarr.Dockerfile .` ok at `3ad3598`; container non-root, healthy, SIGTERM exit 0. |
+| FR-011 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-011 | `internal/radarr/actions.json` has 230 Python-derived actions; `TestMCPContract` discovers them through `radarr_action`. |
+| FR-012 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-012 | `internal/actiondispatch/dispatch_test.go`, `TestMCPContract` prove unconfirmed mutations send no request. |
+| FR-013 | [Quality and release gates](plan.md#quality-and-release-gates) | T-013 | `tests/test_go_action_parity.py` verifies generated catalog against Python source. |
+
+## Amendments
+
+- **2026-10-22:** Extend the Go catalog to all 230 domain actions in the Python client behind `radarr_action`; keep the existing typed tools. Every POST/PUT/PATCH/DELETE requires `confirm=true`. Exclude the HTTP helper and UI/non-domain endpoints (`get_api`, login/logout, calendar `.ics`, `/ping`, generic root/content paths); enforce catalog parity from the Python AST.
 
 ## Open questions
 

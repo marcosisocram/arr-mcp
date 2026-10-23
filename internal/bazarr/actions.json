@@ -1,0 +1,408 @@
+[
+  {
+    "body_direct": "",
+    "body_params": {
+      "media_type": "mediaType",
+      "subtitle_id": "subtitleId"
+    },
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "add_to_blacklist",
+    "path": "/blacklist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "subtitle_id",
+      "media_type"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {
+      "forced": "forced",
+      "hi": "hi",
+      "language": "language",
+      "movie_id": "movieId"
+    },
+    "defaults": {
+      "forced": false,
+      "hi": false
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "download_movie_subtitle",
+    "path": "/movies/subtitles",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "movie_id",
+      "language"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {
+      "episode_id": "episodeId",
+      "forced": "forced",
+      "hi": "hi",
+      "language": "language"
+    },
+    "defaults": {
+      "forced": false,
+      "hi": false
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "download_series_subtitle",
+    "path": "/episodes/subtitles",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "episode_id",
+      "language"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_blacklist",
+    "path": "/blacklist",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_enabled_languages",
+    "path": "/languages/enabled",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_enabled_providers",
+    "path": "/providers/enabled",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_episode_subtitles",
+    "path": "/episodes/{episode_id}",
+    "path_params": [
+      "episode_id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "episode_id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": 1,
+      "page_size": 20
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_history",
+    "path": "/history",
+    "path_params": [],
+    "query_params": {
+      "page": "page",
+      "page_size": "pageSize"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_languages",
+    "path": "/languages",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movie_subtitles",
+    "path": "/movies/{movie_id}",
+    "path_params": [
+      "movie_id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "movie_id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": 1,
+      "page_size": 20
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_movies",
+    "path": "/movies",
+    "path_params": [],
+    "query_params": {
+      "page": "page",
+      "page_size": "pageSize"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_providers",
+    "path": "/providers",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": 1,
+      "page_size": 20
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_series",
+    "path": "/series",
+    "path_params": [],
+    "query_params": {
+      "page": "page",
+      "page_size": "pageSize"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_series_subtitles",
+    "path": "/series/{series_id}",
+    "path_params": [
+      "series_id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "series_id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_settings",
+    "path": "/system/settings",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_health",
+    "path": "/system/health",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "lines": 50
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_logs",
+    "path": "/system/logs",
+    "path_params": [],
+    "query_params": {
+      "lines": "lines"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": false,
+    "method": "GET",
+    "name": "get_system_status",
+    "path": "/system/status",
+    "path_params": [],
+    "query_params": {},
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": 1,
+      "page_size": 20
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_wanted_movies",
+    "path": "/movies/wanted",
+    "path_params": [],
+    "query_params": {
+      "page": "page",
+      "page_size": "pageSize"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {
+      "page": 1,
+      "page_size": 20
+    },
+    "destructive": false,
+    "method": "GET",
+    "name": "get_wanted_series",
+    "path": "/episodes/wanted",
+    "path_params": [],
+    "query_params": {
+      "page": "page",
+      "page_size": "pageSize"
+    },
+    "required_params": []
+  },
+  {
+    "body_direct": "",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "DELETE",
+    "name": "remove_from_blacklist",
+    "path": "/blacklist/{blacklist_id}",
+    "path_params": [
+      "blacklist_id"
+    ],
+    "query_params": {},
+    "required_params": [
+      "blacklist_id"
+    ]
+  },
+  {
+    "body_direct": "",
+    "body_params": {
+      "movie_id": "movieId"
+    },
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "search_movie_subtitles",
+    "path": "/movies/search",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "movie_id"
+    ]
+  },
+  {
+    "body_params": {
+      "episode_id": "episodeId"
+    },
+    "defaults": {
+      "episode_id": null
+    },
+    "destructive": true,
+    "method": "POST",
+    "name": "search_series_subtitles",
+    "path": "/episodes/search",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "series_id"
+    ],
+    "variant": {
+      "ignore_params": [
+        "series_id"
+      ],
+      "otherwise": {
+        "body_params": {
+          "series_id": "seriesId"
+        },
+        "path": "/series/search"
+      },
+      "parameter": "episode_id",
+      "truthy": true
+    }
+  },
+  {
+    "body_direct": "",
+    "body_params": {
+      "provider_name": "provider"
+    },
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "test_provider",
+    "path": "/providers/test",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "provider_name"
+    ]
+  },
+  {
+    "body_direct": "settings_data",
+    "body_params": {},
+    "defaults": {},
+    "destructive": true,
+    "method": "POST",
+    "name": "update_settings",
+    "path": "/system/settings",
+    "path_params": [],
+    "query_params": {},
+    "required_params": [
+      "settings_data"
+    ]
+  }
+]

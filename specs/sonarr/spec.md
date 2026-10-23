@@ -22,6 +22,9 @@ As an MCP client operator, I want an independently deployable Go MCP for Sonarr 
 - FR-011: Provide offline mocked tests, operator documentation, and a non-root multi-stage Docker image. Do not change or remove the Python server.
 - SC-001: `go test ./...`, `go vet ./...`, and `go test -race ./...` pass and prove initialization, catalog discovery, read/add/monitor/search calls, validation, and sanitized errors without a live Sonarr instance.
 - SC-002: The Sonarr executable builds and runs independently and is containerized with no Python package or runtime.
+- FR-012: `sonarr_action` exposes every public Sonarr domain action implemented by the Python API client, except its HTTP helper and explicitly excluded UI endpoints. `action="list_actions"` discovers the catalog; existing typed tools remain available. Credential-like fields in routed results are redacted.
+- FR-013: Mutating or destructive actions invoked through `sonarr_action` require `confirm=true`; without it, the tool returns a cancellation result and makes no upstream request. All requests retain FR-010 security bounds.
+- FR-014: A parity test derives the expected catalog from the Python client and fails on additions, removals, or renames not reflected in Go. The generator rejects unsupported method bodies rather than silently omitting actions.
 
 ## Why a new spec
 
@@ -29,11 +32,11 @@ As an MCP client operator, I want an independently deployable Go MCP for Sonarr 
 
 ## Scope and interfaces
 
-The first release covers library reads, TVDB lookup, add, series/episode monitoring, series/season/episode release search, command tracking, and queue/history reads. Proposed tool names: `sonarr_list_series`, `sonarr_get_series`, `sonarr_lookup_series`, `sonarr_list_quality_profiles`, `sonarr_list_root_folders`, `sonarr_list_episodes`, `sonarr_get_episode`, `sonarr_add_series`, `sonarr_set_series_monitored`, `sonarr_set_episode_monitored`, `sonarr_search_series`, `sonarr_search_season`, `sonarr_search_episodes`, `sonarr_get_command`, `sonarr_get_queue`, and `sonarr_get_history`.
+The guided typed tools cover library reads, TVDB lookup, add, series/episode monitoring, release search, command tracking, and queue/history reads. `sonarr_action` additionally routes all 227 Python API-client domain actions; `action="list_actions"` discovers the catalog. Names and argument spellings follow the Python client. The `lookup_series` and `add_series` composites are routed with explicit confirmation on add.
 
 Configuration: `SONARR_URL`, `SONARR_API_KEY`, and `SONARR_LISTEN_ADDR` (default `127.0.0.1:8080`). The server is exposed at `/mcp/sonarr`. Validation target: the operator's Sonarr `4.0.20.3014-ls329` (build 2026-10-15) through `/api/v3`; API v3 does not itself identify the application version, so other releases stay unverified until tested.
 
-Explicit non-goals: removing series or files, manual import, editing indexers/download clients/config, backups, per-season monitoring control, generic administrative or destructive commands that are not a series/season/episode release search, alternate transports (stdio), the aggregate host, Kubernetes manifests, Compose examples, inbound authentication, and Python migration/removal. HTTP deployments must be protected by a trusted TLS/access-control proxy; route separation is not a security boundary.
+Explicit non-goals: login/logout and UI-only endpoints (`/api`, calendar `.ics` feed), alternate transports (stdio), the aggregate host, Kubernetes manifests, Compose examples, inbound authentication, and Python migration/removal. Domain actions including removal, manual import, indexer/download-client/configuration, backup, monitoring, and administration are in scope but mutations require explicit confirmation. HTTP deployments must be protected by a trusted TLS/access-control proxy; route separation is not a security boundary.
 
 ## Traceability
 
@@ -50,6 +53,13 @@ Explicit non-goals: removing series or files, manual import, editing indexers/do
 | FR-009 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-009 | `TestSearchQueueAndHistory`, `TestToolValidation` ok. |
 | FR-010 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-010 | `TestCancellationAndTLSDefaults`, `TestNoRedirectLeaksAPIKey` ok. |
 | FR-011 | [Quality and release gates](plan.md#quality-and-release-gates) | T-011 | `docker build -f docker/sonarr.Dockerfile .` ok; container non-root, healthy, SIGTERM exit 0. |
+| FR-012 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-012 | `internal/sonarr/actions.json` has 227 Python-derived actions; `TestMCPContract` discovers them through `sonarr_action`. |
+| FR-013 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-013 | `internal/actiondispatch/dispatch_test.go`, `TestMCPContract` prove unconfirmed mutations send no request. |
+| FR-014 | [Quality and release gates](plan.md#quality-and-release-gates) | T-014 | `tests/test_go_action_parity.py` verifies generated catalog against Python source. |
+
+## Amendments
+
+- **2026-10-22:** Extend the Go catalog to all 227 domain actions in the Python client behind `sonarr_action`; keep the existing typed tools. Every POST/PUT/PATCH/DELETE requires `confirm=true`. Exclude the HTTP helper and UI/non-domain endpoints (`get_api`, login/logout, calendar `.ics`, `/ping`, generic root/content paths); enforce catalog parity from the Python AST.
 
 ## Open questions
 

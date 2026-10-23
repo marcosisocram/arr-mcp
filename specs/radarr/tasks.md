@@ -13,3 +13,6 @@ Governing spec: [spec.md](spec.md). Design: [plan.md](plan.md). Rows: [requireme
 - [x] **CONN-ARR-MCP-RADARR-R009:** Bound and sanitize requests; prove cancellation, TLS default, redirect refusal, and secret redaction.
 - [x] **CONN-ARR-MCP-RADARR-R010:** Add docs and a non-root Docker image; build the image successfully.
 - [x] Run the Go gates, Docker build, and spec-standard/status checks; regenerate `status.json`.
+- [x] **CONN-ARR-MCP-RADARR-R011:** Generate and embed the complete Radarr domain action catalog; add `radarr_action` while retaining typed tools.
+- [x] **CONN-ARR-MCP-RADARR-R012:** Require explicit confirmation for mutating/destructive catalog actions and prove no request is sent without it.
+- [x] **CONN-ARR-MCP-RADARR-R013:** Add AST-based action generation and Python/Go parity tests; reject unsupported method shapes.

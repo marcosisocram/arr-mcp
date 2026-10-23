@@ -39,7 +39,9 @@ List results use object outputs. Bazarr's paginated endpoints return `data` and 
 
 ## Scope and safety
 
-The MCP does not expose subtitle uploads/deletion, sync/translation/modification, provider reset, shutdown/restart, configuration editing, backups, or webhooks. Tool inputs never accept an upstream URL or filesystem path. Reads and profile updates do not trigger subtitle searches. Mass search and per-episode subtitle download are distinct explicit tools with visible side-effect descriptions.
+The guided tools are complemented by `bazarr_action`, which exposes all 25 public Bazarr Python-client domain actions. Discover names with `{"action":"list_actions"}`; pass the method arguments in `params_json`, for example `{"action":"get_series_subtitles","params_json":"{\"series_id\":12}"}`. Results use an object envelope (`result`).
+
+All write verbs (POST, PUT, PATCH, DELETE) through `bazarr_action` require the tool argument `confirm: true`; without it the tool returns `cancelled` and sends no request. This includes subtitle searches/downloads, settings and blacklist changes. The router still trusts only configured `BAZARR_URL`; tool arguments cannot choose an upstream URL. Credential-like fields in routed responses are redacted. The sole excluded public method is the Python client's internal `request` helper, which is asserted by the Python/Go parity test.
 
 ## Run locally
 
