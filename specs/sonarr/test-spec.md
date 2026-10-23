@@ -15,6 +15,7 @@ Governing spec: [spec.md](spec.md).
 | T-009 | FR-009 | HTTP/tool contract | Mock `GET /queue` and `GET /history`. | Server-side paging passed through; records decoded; page/pageSize bounds enforced. | |
 | T-010 | FR-010 | Unit | Mock timeout, cancellation, redirect, and an upstream 500 whose body contains a secret. | Cancellation honored; TLS defaults retained; redirect not followed; error contains operation/status only. | |
 | T-011 | FR-011 | Build/package | Run the Go gates and build the Docker image. | Go checks pass; the container builds and runs non-root without Python. | |
+| T-015 | FR-015 | MCP contract | Read the `sonarr_action` output schema from `tools/list`. | `properties.result` is a JSON object/schema, not boolean `true`; ordinary and dynamic results remain valid. | `TestMCPContract`, `go test ./...`, `go test -race ./...`. |
 
 ## Negative and boundary cases
 
@@ -37,3 +38,4 @@ Recorded on 2026-10-16 (container host, Go 1.26.2):
 ## Amendments
 
 - **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the five list/lookup tools return `{"series"}`, `{"candidates"}`, `{"profiles"}`, `{"folders"}`, and `{"episodes"}` wrappers. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.
+- **2026-10-22 (Hermes v0.22.0 compatibility):** `sonarr_action` now publishes an object-form permissive schema for its dynamic `result`; T-015 checks the wire schema.

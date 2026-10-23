@@ -90,6 +90,16 @@ func TestMCPContract(t *testing.T) {
 		if !strings.Contains(string(encoded), `"type":"object"`) {
 			t.Fatalf("%s outputSchema is not a top-level object: %s", tool.Name, encoded)
 		}
+		if tool.Name == "bazarr_action" {
+			var schema map[string]any
+			if err := json.Unmarshal(encoded, &schema); err != nil {
+				t.Fatal(err)
+			}
+			properties, _ := schema["properties"].(map[string]any)
+			if _, ok := properties["result"].(map[string]any); !ok {
+				t.Fatalf("bazarr_action result schema must be an object, got %s", encoded)
+			}
+		}
 	}
 	call := func(name string, arguments map[string]any) *mcp.CallToolResult {
 		t.Helper()

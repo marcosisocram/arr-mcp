@@ -25,6 +25,7 @@ As an MCP client operator, I want an independently deployable Go MCP for Bazarr 
 - FR-012: `bazarr_action` exposes every public Bazarr domain action implemented by the Python API client, except its HTTP helper. `action="list_actions"` discovers the catalog; existing typed tools remain available. Credential-like fields in routed results are redacted.
 - FR-013: Mutating or destructive actions invoked through `bazarr_action` require `confirm=true`; without it, the tool returns a cancellation result and makes no upstream request. All requests retain FR-010 security bounds.
 - FR-014: A parity test derives the expected catalog from the Python client and fails on additions, removals, or renames not reflected in Go. The generator rejects unsupported method bodies rather than silently omitting actions.
+- FR-015: The `bazarr_action` output schema represents its dynamic `result` value with a valid JSON Schema object, not a boolean schema, so strict MCP clients can parse `tools/list`.
 
 ## Why a new spec
 
@@ -56,6 +57,7 @@ The two mass subtitle searches and subtitle downloads remain explicit domain ope
 | FR-012 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-012 | `internal/bazarr/actions.json` has 25 Python-derived actions; `TestMCPContract` discovers them through `bazarr_action`. |
 | FR-013 | [Security and failure behavior](plan.md#security-and-failure-behavior) | T-013 | `internal/actiondispatch/dispatch_test.go`, `TestMCPContract` prove unconfirmed mutations send no request. |
 | FR-014 | [Quality and release gates](plan.md#quality-and-release-gates) | T-014 | `tests/test_go_action_parity.py` verifies generated catalog against Python source. |
+| FR-015 | [Interfaces and data model](plan.md#interfaces-and-data-model) | T-015 | |
 
 ## Amendments
 

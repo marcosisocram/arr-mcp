@@ -17,3 +17,4 @@ Governing spec: [spec.md](spec.md). Design: [plan.md](plan.md). Rows: [requireme
 - [x] **CONN-ARR-MCP-BAZARR-R012:** Generate and embed the complete Bazarr domain action catalog; add `bazarr_action` while retaining typed tools.
 - [x] **CONN-ARR-MCP-BAZARR-R013:** Require explicit confirmation for mutating/destructive catalog actions and prove no request is sent without it.
 - [x] **CONN-ARR-MCP-BAZARR-R014:** Add AST-based action generation and Python/Go parity tests; reject unsupported method shapes.
+- [x] **CONN-ARR-MCP-BAZARR-R015:** Publish a non-boolean permissive JSON Schema for `bazarr_action.result` and assert it in the MCP contract.

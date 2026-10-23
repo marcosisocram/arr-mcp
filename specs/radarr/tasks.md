@@ -16,3 +16,4 @@ Governing spec: [spec.md](spec.md). Design: [plan.md](plan.md). Rows: [requireme
 - [x] **CONN-ARR-MCP-RADARR-R011:** Generate and embed the complete Radarr domain action catalog; add `radarr_action` while retaining typed tools.
 - [x] **CONN-ARR-MCP-RADARR-R012:** Require explicit confirmation for mutating/destructive catalog actions and prove no request is sent without it.
 - [x] **CONN-ARR-MCP-RADARR-R013:** Add AST-based action generation and Python/Go parity tests; reject unsupported method shapes.
+- [x] **CONN-ARR-MCP-RADARR-R014:** Publish a non-boolean permissive JSON Schema for `radarr_action.result` and assert it in the MCP contract.

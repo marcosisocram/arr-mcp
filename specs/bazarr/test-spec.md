@@ -15,6 +15,7 @@ Governing spec: [spec.md](spec.md).
 | T-009 | FR-009 | Contract | List tools through SDK transport. | Every tool has `outputSchema.type == "object"`. | |
 | T-010 | FR-010 | Unit/HTTP | Cancellation, oversized response, redirect and upstream error containing secret. | Bounds honored and error excludes secret/body. | |
 | T-011 | FR-011 | Package | Run Go gates and build/run container. | Non-root numeric UID, health endpoint healthy, SIGTERM exits cleanly. | |
+| T-015 | FR-015 | MCP contract | Read the `bazarr_action` output schema from `tools/list`. | `properties.result` is a JSON object/schema, not boolean `true`; ordinary and dynamic results remain valid. | `TestMCPContract`, `go test ./...`, `go test -race ./...`. |
 
 ## Negative and boundary cases
 
@@ -34,3 +35,7 @@ Recorded on 2026-10-17 (Go 1.26.2):
 - Container smoke: read-only filesystem, all capabilities dropped, `User=65532:65532`, `/health` returned `{"status":"ok"}`, `--healthcheck` succeeded, SIGTERM exit code 0.
 - `pipelines-hook` unavailable in this environment; spec-standard/status commands could not be run.
 - No live Bazarr instance was exercised; Bazarr v1.6.2 API behavior was modeled from upstream source and verified with offline HTTP mocks.
+
+## Amendments
+
+- **2026-10-22 (Hermes v0.22.0 compatibility):** `bazarr_action` now publishes an object-form permissive schema for its dynamic `result`; T-015 checks the wire schema.

@@ -61,3 +61,4 @@ Use context-bound requests, an explicit 15-second timeout, bounded response read
 ## Amendments
 
 - **2026-10-16 (issue #8):** `radarr_list_movies`, `radarr_lookup_movies`, `radarr_list_quality_profiles`, and `radarr_list_root_folders` outputs change from bare arrays to `{"movies": [...]}`, `{"candidates": [...]}`, `{"profiles": [...]}`, and `{"folders": [...]}`. The go-sdk infers `{"type": ["null", "array"]}` for top-level slices, which Python MCP SDK clients (pydantic validation, e.g. hermes-agent) reject before any client-side tool filtering, dropping the whole session. Every tool output is now a top-level object so `outputSchema.type` is `"object"`. Input schemas are unchanged.
+- **2026-10-22 (Hermes v0.22.0):** The dynamic `radarr_action.result` schema is supplied explicitly as a JSON Schema `anyOf` over JSON value types, avoiding boolean schemas that strict MCP clients cannot parse.

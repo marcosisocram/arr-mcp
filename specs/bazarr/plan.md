@@ -40,3 +40,7 @@ Use 15-second request timeout, request context cancellation, 8 MiB response cap,
 - Bazarr’s history endpoint computes derived fields and may be slower than library reads; page size is capped.
 - Mass subtitle searches can initiate downloads. Explicit one-item scope and tool descriptions make this visible; global `search-wanted` actions are intentionally excluded.
 - The `/api/system/status` response includes sensitive local metadata; only a deliberate allowlist is returned.
+
+## Amendments
+
+- **2026-10-22 (Hermes v0.22.0):** The dynamic `bazarr_action.result` schema is supplied explicitly as a JSON Schema `anyOf` over JSON value types, avoiding boolean schemas that strict MCP clients cannot parse.

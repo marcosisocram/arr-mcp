@@ -14,6 +14,7 @@ Governing spec: [spec.md](spec.md).
 | T-008 | FR-008 | HTTP/tool contract | Mock `GET /queue` and `GET /history`. | Server-side paging passed through; records decoded; page/pageSize bounds enforced. | |
 | T-009 | FR-009 | Unit | Mock timeout, cancellation, redirect, and an upstream 500 whose body contains a secret. | Cancellation honored; TLS defaults retained; redirect not followed; error contains operation/status only. | |
 | T-010 | FR-010 | Build/package | Run the Go gates and build the Docker image. | Go checks pass; the container builds and runs non-root without Python. | `docker build` ok at `3ad3598`; inspected `User=nonroot:nonroot`, `Health=healthy`, `SIGTERM` exit 0. |
+| T-015 | FR-014 | MCP contract | Read the `radarr_action` output schema from `tools/list`. | `properties.result` is a JSON object/schema, not boolean `true`; ordinary and dynamic results remain valid. | `TestMCPContract`, `go test ./...`, `go test -race ./...`. |
 
 ## Negative and boundary cases
 
@@ -36,3 +37,4 @@ Recorded at revision `3ad3598` on 2026-10-16 (container host, Go 1.26.2):
 ## Amendments
 
 - **2026-10-16 (issue #8):** `TestMCPContract` now asserts every tool's `outputSchema.type` is `"object"` over the wire, and the four list/lookup tools return `{"movies"}`, `{"candidates"}`, `{"profiles"}`, and `{"folders"}` wrappers. All Go gates re-run green; images rebuilt and pushed to Docker Hub as `latest`.
+- **2026-10-22 (Hermes v0.22.0 compatibility):** `radarr_action` now publishes an object-form permissive schema for its dynamic `result`; T-015 checks the wire schema.

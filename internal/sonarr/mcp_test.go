@@ -106,6 +106,16 @@ func TestMCPContract(t *testing.T) {
 		if !strings.Contains(string(outputSchema), `"type":"object"`) {
 			t.Fatalf("%s output schema is not a top-level object (Python SDK clients reject it): %s", tool.Name, outputSchema)
 		}
+		if tool.Name == "sonarr_action" {
+			var schema map[string]any
+			if err := json.Unmarshal(outputSchema, &schema); err != nil {
+				t.Fatal(err)
+			}
+			properties, _ := schema["properties"].(map[string]any)
+			if _, ok := properties["result"].(map[string]any); !ok {
+				t.Fatalf("sonarr_action result schema must be an object, got %s", outputSchema)
+			}
+		}
 		if tool.Name != "sonarr_list_series" {
 			continue
 		}
