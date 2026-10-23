@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -152,6 +153,11 @@ func (c *Client) getInt(ctx context.Context, path string) (int64, error) {
 	return value, nil
 }
 
+func (c *Client) getText(ctx context.Context, path string) (string, error) {
+	body, err := c.request(ctx, http.MethodGet, path, nil, nil)
+	return strings.TrimSpace(string(body)), err
+}
+
 func (c *Client) post(ctx context.Context, path string, form url.Values) error {
 	_, err := c.request(ctx, http.MethodPost, path, nil, form)
 	return err
@@ -194,6 +200,64 @@ type TransferInfo struct {
 	ConnectionStatus string `json:"connection_status"`
 }
 
+type TorrentFile struct {
+	Name         string  `json:"name"`
+	Size         int64   `json:"size"`
+	Progress     float64 `json:"progress"`
+	Priority     int     `json:"priority"`
+	IsSeed       bool    `json:"is_seed"`
+	PieceRange   []int   `json:"piece_range"`
+	Availability float64 `json:"availability"`
+}
+
+type Tracker struct {
+	URL        string `json:"url"`
+	Status     int    `json:"status"`
+	Tier       int    `json:"tier"`
+	NumPeers   int    `json:"num_peers"`
+	NumSeeds   int    `json:"num_seeds"`
+	NumLeeches int    `json:"num_leeches"`
+	Message    string `json:"msg"`
+}
+
+type Peer struct {
+	Address    string  `json:"address"`
+	Client     string  `json:"client"`
+	Connection string  `json:"connection"`
+	Flags      string  `json:"flags"`
+	Progress   float64 `json:"progress"`
+	DLSpeed    int64   `json:"dl_speed"`
+	UPSpeed    int64   `json:"up_speed"`
+	Downloaded int64   `json:"downloaded"`
+	Uploaded   int64   `json:"uploaded"`
+	Relevance  float64 `json:"relevance"`
+	Files      string  `json:"files"`
+}
+
+type Category struct {
+	Name     string `json:"name"`
+	SavePath string `json:"save_path"`
+}
+
+type PeerResponse struct {
+	Peers map[string]Peer `json:"peers"`
+}
+
+type MainDataResponse struct {
+	ServerState map[string]any `json:"server_state"`
+}
+
+var serverStateFields = map[string]bool{
+	"alltime_dl": true, "alltime_ul": true, "average_time_queue": true,
+	"connection_status": true, "dht_nodes": true, "dl_info_data": true,
+	"dl_info_speed": true, "dl_rate_limit": true, "free_space_on_disk": true,
+	"global_ratio": true, "queued_io_jobs": true, "queueing": true,
+	"read_cache_hits": true, "read_cache_overload": true, "refresh_interval": true,
+	"total_buffers_size": true, "total_peer_connections": true, "total_queued_size": true,
+	"total_wasted_session": true, "up_info_data": true, "up_info_speed": true,
+	"up_rate_limit": true, "use_alt_speed_limits": true, "write_cache_overload": true,
+}
+
 func (c *Client) ListTorrents(ctx context.Context, query url.Values) ([]Torrent, error) {
 	var torrents []Torrent
 	err := c.getJSON(ctx, "/torrents/info", query, &torrents)
@@ -234,6 +298,110 @@ func (c *Client) SetTransferLimits(ctx context.Context, download, upload int64) 
 
 func (c *Client) ToggleSpeedLimitsMode(ctx context.Context) error {
 	return c.post(ctx, "/transfer/toggleSpeedLimitsMode", url.Values{})
+}
+
+func (c *Client) TorrentFiles(ctx context.Context, hash string) ([]TorrentFile, error) {
+	var result []TorrentFile
+	err := c.getJSON(ctx, "/torrents/files", url.Values{"hash": {hash}}, &result)
+	return result, err
+}
+
+func (c *Client) TorrentTrackers(ctx context.Context, hash string) ([]Tracker, error) {
+	var result []Tracker
+	if err := c.getJSON(ctx, "/torrents/trackers", url.Values{"hash": {hash}}, &result); err != nil {
+		return nil, err
+	}
+	for i := range result {
+		result[i].URL = redactTrackerURL(result[i].URL)
+	}
+	return result, nil
+}
+
+func (c *Client) TorrentPeers(ctx context.Context, hash string) ([]Peer, error) {
+	var response PeerResponse
+	if err := c.getJSON(ctx, "/torrents/peers", url.Values{"hash": {hash}}, &response); err != nil {
+		return nil, err
+	}
+	peers := make([]Peer, 0, len(response.Peers))
+	for address, peer := range response.Peers {
+		peer.Address = address
+		peers = append(peers, peer)
+	}
+	sort.Slice(peers, func(i, j int) bool { return peers[i].Address < peers[j].Address })
+	return peers, nil
+}
+
+func (c *Client) Categories(ctx context.Context) ([]Category, error) {
+	var result map[string]struct {
+		SavePath string `json:"savePath"`
+	}
+	if err := c.getJSON(ctx, "/torrents/categories", nil, &result); err != nil {
+		return nil, err
+	}
+	categories := make([]Category, 0, len(result))
+	for name, category := range result {
+		categories = append(categories, Category{Name: name, SavePath: category.SavePath})
+	}
+	sort.Slice(categories, func(i, j int) bool { return categories[i].Name < categories[j].Name })
+	return categories, nil
+}
+
+func (c *Client) Tags(ctx context.Context) ([]string, error) {
+	var result []string
+	if err := c.getJSON(ctx, "/torrents/tags", nil, &result); err != nil {
+		return nil, err
+	}
+	sort.Strings(result)
+	return result, nil
+}
+
+func (c *Client) AppVersion(ctx context.Context) (string, string, error) {
+	version, err := c.getText(ctx, "/app/version")
+	if err != nil {
+		return "", "", err
+	}
+	webapiVersion, err := c.getText(ctx, "/app/webapiVersion")
+	return version, webapiVersion, err
+}
+
+func (c *Client) ServerState(ctx context.Context) (map[string]any, error) {
+	var response MainDataResponse
+	if err := c.getJSON(ctx, "/sync/maindata", url.Values{"rid": {"0"}}, &response); err != nil {
+		return nil, err
+	}
+	state := make(map[string]any)
+	for key, value := range response.ServerState {
+		if serverStateFields[key] {
+			state[key] = value
+		}
+	}
+	return state, nil
+}
+
+func (c *Client) DeleteTorrents(ctx context.Context, hashes []string, deleteFiles bool) error {
+	return c.post(ctx, "/torrents/delete", url.Values{
+		"hashes":      {strings.Join(hashes, "|")},
+		"deleteFiles": {strconv.FormatBool(deleteFiles)},
+	})
+}
+
+func redactTrackerURL(raw string) string {
+	parsed, err := url.Parse(raw)
+	if err != nil {
+		return "[redacted tracker URL]"
+	}
+	if parsed.User != nil {
+		parsed.User = nil
+	}
+	query := parsed.Query()
+	for key := range query {
+		lower := strings.ToLower(key)
+		if strings.Contains(lower, "passkey") || strings.Contains(lower, "authkey") || strings.Contains(lower, "apikey") || strings.Contains(lower, "token") || strings.Contains(lower, "secret") || lower == "key" {
+			query.Set(key, "[redacted]")
+		}
+	}
+	parsed.RawQuery = query.Encode()
+	return parsed.String()
 }
 
 func (c *Client) SetTorrentsPaused(ctx context.Context, hashes []string, paused bool) error {

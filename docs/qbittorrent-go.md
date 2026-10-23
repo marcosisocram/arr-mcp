@@ -13,13 +13,13 @@ Set `QBITTORRENT_URL` to the trusted qBittorrent WebUI base URL. Authenticate wi
 
 ## Tools
 
-Read tools: `qbittorrent_list_torrents`, `qbittorrent_torrent_properties`, `qbittorrent_transfer_info`, `qbittorrent_get_transfer_limits`, and `qbittorrent_get_speed_limits_mode`. `qbittorrent_list_torrents` returns `{"torrents": [...]}` — every tool output is a top-level object, which Python MCP SDK clients require when validating `outputSchema`.
+Read tools: `qbittorrent_list_torrents`, `qbittorrent_torrent_properties`, `qbittorrent_transfer_info`, `qbittorrent_get_transfer_limits`, `qbittorrent_get_speed_limits_mode`, `qbittorrent_list_torrent_files`, `qbittorrent_list_torrent_trackers`, `qbittorrent_list_torrent_peers`, `qbittorrent_list_categories`, `qbittorrent_list_tags`, `qbittorrent_app_version`, and `qbittorrent_server_state`. File/peer results are capped (default 500/200; maximum 5000/1000) and report `truncated`. Tracker URLs redact userinfo and sensitive query values; server state is allowlisted. Every tool output is a top-level object, which Python MCP SDK clients require when validating `outputSchema`.
 
-Control tools: `qbittorrent_pause_torrents`, `qbittorrent_resume_torrents`, `qbittorrent_set_transfer_limits`, and `qbittorrent_toggle_speed_limits`. Pause/resume requires explicit torrent hashes; empty selections and the `all` wildcard are rejected. Transfer limits are bytes per second; zero means unlimited.
+Control tools: `qbittorrent_pause_torrents`, `qbittorrent_resume_torrents`, `qbittorrent_set_transfer_limits`, `qbittorrent_toggle_speed_limits`, and `qbittorrent_delete_torrents`. Pause/resume and removal require explicit torrent hashes; empty selections and the `all` wildcard are rejected. Removal requires `confirm=true`, accepts 1–100 hashes, and defaults `delete_files` to false. Setting `delete_files=true` permanently removes downloaded data. Transfer limits are bytes per second; zero means unlimited.
 
 Note on upstream authentication: qBittorrent does not accept the `X-Api-Key` header used by the other *arr apps. The client authenticates with `Authorization: Bearer <api key>` (validated against qBittorrent 5.2.x) or the WebUI login flow.
 
-Adding/deleting torrents, deleting files, RSS, search, categories/tags, logs, and sync are not part of this pilot.
+Adding torrents, deleting files by default, RSS, search, logs, full/incremental sync, per-torrent limits, recheck, and reannounce are not part of this pilot.
 
 ## Run locally
 

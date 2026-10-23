@@ -191,3 +191,125 @@ func TestTorrentJSONFields(t *testing.T) {
 		t.Fatalf("failed decoding torrent: %#v %v", torrent, err)
 	}
 }
+
+// spec: CONN-ARR-MCP-R009, CONN-ARR-MCP-R010, CONN-ARR-MCP-R011
+func TestAdditionalReadsAndRedaction(t *testing.T) {
+	const hash = "0123456789012345678901234567890123456789"
+	deleteCalls := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/api/v2/torrents/files":
+			_, _ = w.Write([]byte(`[{"name":"a","size":1},{"name":"b","size":2}]`))
+		case "/api/v2/torrents/trackers":
+			_, _ = w.Write([]byte(`[{"url":"https://user:password@tracker.example/announce?passkey=secret&token=hidden&foo=ok"}]`))
+		case "/api/v2/torrents/peers":
+			_, _ = w.Write([]byte(`{"peers":{"2.0.0.1:2":{"client":"b"},"1.0.0.1:1":{"client":"a"}}}`))
+		case "/api/v2/torrents/categories":
+			_, _ = w.Write([]byte(`{"z":{"savePath":"/z"},"a":{"savePath":"/a"}}`))
+		case "/api/v2/torrents/tags":
+			_, _ = w.Write([]byte(`["z","a"]`))
+		case "/api/v2/app/version":
+			_, _ = w.Write([]byte("5.2.0\n"))
+		case "/api/v2/app/webapiVersion":
+			_, _ = w.Write([]byte("2.14.1\n"))
+		case "/api/v2/sync/maindata":
+			_, _ = w.Write([]byte(`{"server_state":{"free_space_on_disk":42,"password":"do-not-return"}}`))
+		case "/api/v2/torrents/delete":
+			deleteCalls++
+			if err := r.ParseForm(); err != nil || r.Form.Get("hashes") != hash || r.Form.Get("deleteFiles") != "true" {
+				t.Errorf("unexpected delete form: %s", r.Form.Encode())
+			}
+			_, _ = w.Write([]byte("Ok."))
+		default:
+			t.Errorf("unexpected endpoint %s", r.URL.Path)
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+	client, err := NewClient(Config{BaseURL: server.URL, APIKey: "key"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	files, err := client.TorrentFiles(context.Background(), hash)
+	if err != nil || len(files) != 2 {
+		t.Fatalf("files: %#v %v", files, err)
+	}
+	trackers, err := client.TorrentTrackers(context.Background(), hash)
+	if err != nil {
+		t.Fatal(err)
+	}
+	trackerJSON, _ := json.Marshal(trackers)
+	for _, secret := range []string{"user", "password", "secret", "hidden"} {
+		if strings.Contains(string(trackerJSON), secret) {
+			t.Fatalf("tracker secret leaked: %s", trackerJSON)
+		}
+	}
+	if !strings.Contains(string(trackerJSON), "foo=ok") {
+		t.Fatalf("non-sensitive tracker query was lost: %s", trackerJSON)
+	}
+	peers, err := client.TorrentPeers(context.Background(), hash)
+	if err != nil || len(peers) != 2 || peers[0].Address != "1.0.0.1:1" {
+		t.Fatalf("peers not decoded/sorted: %#v %v", peers, err)
+	}
+	categories, err := client.Categories(context.Background())
+	if err != nil || len(categories) != 2 || categories[0].Name != "a" {
+		t.Fatalf("categories not sorted: %#v %v", categories, err)
+	}
+	tags, err := client.Tags(context.Background())
+	if err != nil || len(tags) != 2 || tags[0] != "a" {
+		t.Fatalf("tags not sorted: %#v %v", tags, err)
+	}
+	version, webapi, err := client.AppVersion(context.Background())
+	if err != nil || version != "5.2.0" || webapi != "2.14.1" {
+		t.Fatalf("versions: %q %q %v", version, webapi, err)
+	}
+	state, err := client.ServerState(context.Background())
+	if err != nil || state["free_space_on_disk"] != float64(42) || state["password"] != nil {
+		t.Fatalf("unsafe server state: %#v %v", state, err)
+	}
+	if err := client.DeleteTorrents(context.Background(), []string{hash}, true); err != nil || deleteCalls != 1 {
+		t.Fatalf("delete request failed: calls=%d err=%v", deleteCalls, err)
+	}
+}
+
+// spec: CONN-ARR-MCP-R010
+func TestDeleteTorrentsConfirmationValidation(t *testing.T) {
+	requests := 0
+	upstream := httptest.NewServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) { requests++ }))
+	defer upstream.Close()
+	api, err := NewClient(Config{BaseURL: upstream.URL, APIKey: "key"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := validateHashes(nil); err == nil {
+		t.Fatal("empty hashes accepted")
+	}
+	if err := validateHashes([]string{"all"}); err == nil {
+		t.Fatal("wildcard accepted")
+	}
+	if requests != 0 {
+		t.Fatalf("validation unexpectedly caused upstream request: %d", requests)
+	}
+	_ = api
+}
+
+// spec: CONN-ARR-MCP-R009
+func TestBoundedReadLimits(t *testing.T) {
+	for _, test := range []struct{ input, defaultValue, maximum, want int }{
+		{0, 500, 5000, 500},
+		{1, 500, 5000, 1},
+		{5000, 500, 5000, 5000},
+		{0, 200, 1000, 200},
+	} {
+		got, err := boundedLimit(test.input, test.defaultValue, test.maximum)
+		if err != nil || got != test.want {
+			t.Fatalf("boundedLimit(%d) = %d, %v; want %d", test.input, got, err, test.want)
+		}
+	}
+	for _, input := range []int{-1, 5001} {
+		if _, err := boundedLimit(input, 500, 5000); err == nil {
+			t.Fatalf("invalid limit %d accepted", input)
+		}
+	}
+}

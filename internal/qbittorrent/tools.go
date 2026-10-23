@@ -24,6 +24,51 @@ type TorrentPropertiesInput struct {
 	Hash string `json:"hash" jsonschema:"Torrent hash (40 or 64 hexadecimal characters)."`
 }
 
+type TorrentQueryInput struct {
+	Hash  string `json:"hash" jsonschema:"Torrent hash (40 or 64 hexadecimal characters)."`
+	Limit int    `json:"limit,omitempty" jsonschema:"Maximum results (files 1-5000, peers 1-1000; defaults are 500 and 200)."`
+}
+
+type DeleteTorrentsInput struct {
+	Hashes      []string `json:"hashes" jsonschema:"Explicit list of 1-100 torrent hashes; wildcard all is not supported."`
+	Confirm     bool     `json:"confirm,omitempty" jsonschema:"Must be true to remove the explicitly listed torrents; omission cancels the operation."`
+	DeleteFiles bool     `json:"delete_files,omitempty" jsonschema:"Permanently delete downloaded files as well; defaults to false."`
+}
+
+type DeleteTorrentsOutput struct {
+	Status    string   `json:"status,omitempty"`
+	Cancelled bool     `json:"cancelled,omitempty"`
+	Operation string   `json:"operation,omitempty"`
+	Hashes    []string `json:"hashes,omitempty"`
+}
+
+type BoundedFilesOutput struct {
+	Files     []TorrentFile `json:"files"`
+	Truncated bool          `json:"truncated"`
+}
+
+type BoundedPeersOutput struct {
+	Peers     []Peer `json:"peers"`
+	Truncated bool   `json:"truncated"`
+}
+
+type TrackersOutput struct {
+	Trackers []Tracker `json:"trackers"`
+}
+type CategoriesOutput struct {
+	Categories []Category `json:"categories"`
+}
+type TagsOutput struct {
+	Tags []string `json:"tags"`
+}
+type AppVersionOutput struct {
+	Version       string `json:"version"`
+	WebAPIVersion string `json:"webapi_version"`
+}
+type ServerStateOutput struct {
+	ServerState map[string]any `json:"server_state"`
+}
+
 type TorrentHashesInput struct {
 	Hashes []string `json:"hashes" jsonschema:"Explicit list of torrent hashes to pause or resume; wildcard all is not supported."`
 }
@@ -114,7 +159,95 @@ func NewMCPServer(client *Client) *mcp.Server {
 		}
 		return nil, ActionOutput{Status: "alternative speed limits toggled"}, nil
 	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_torrent_files", Description: "List files in one torrent, capped at 500 by default and 5000 maximum; reports truncation."}, func(ctx context.Context, _ *mcp.CallToolRequest, input TorrentQueryInput) (*mcp.CallToolResult, BoundedFilesOutput, error) {
+		if err := validateTorrentHash(input.Hash); err != nil {
+			return nil, BoundedFilesOutput{}, err
+		}
+		limit, err := boundedLimit(input.Limit, 500, 5000)
+		if err != nil {
+			return nil, BoundedFilesOutput{}, err
+		}
+		files, err := client.TorrentFiles(ctx, input.Hash)
+		if err != nil {
+			return nil, BoundedFilesOutput{}, err
+		}
+		truncated := len(files) > limit
+		if truncated {
+			files = files[:limit]
+		}
+		return nil, BoundedFilesOutput{Files: files, Truncated: truncated}, nil
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_torrent_trackers", Description: "List trackers for one torrent; userinfo and sensitive URL query values are redacted."}, func(ctx context.Context, _ *mcp.CallToolRequest, input TorrentPropertiesInput) (*mcp.CallToolResult, TrackersOutput, error) {
+		if err := validateTorrentHash(input.Hash); err != nil {
+			return nil, TrackersOutput{}, err
+		}
+		result, err := client.TorrentTrackers(ctx, input.Hash)
+		return nil, TrackersOutput{Trackers: result}, err
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_torrent_peers", Description: "List connected peers for one torrent, capped at 200 by default and 1000 maximum."}, func(ctx context.Context, _ *mcp.CallToolRequest, input TorrentQueryInput) (*mcp.CallToolResult, BoundedPeersOutput, error) {
+		if err := validateTorrentHash(input.Hash); err != nil {
+			return nil, BoundedPeersOutput{}, err
+		}
+		limit, err := boundedLimit(input.Limit, 200, 1000)
+		if err != nil {
+			return nil, BoundedPeersOutput{}, err
+		}
+		peers, err := client.TorrentPeers(ctx, input.Hash)
+		if err != nil {
+			return nil, BoundedPeersOutput{}, err
+		}
+		truncated := len(peers) > limit
+		if truncated {
+			peers = peers[:limit]
+		}
+		return nil, BoundedPeersOutput{Peers: peers, Truncated: truncated}, nil
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_categories", Description: "List configured torrent categories and save paths."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, CategoriesOutput, error) {
+		result, err := client.Categories(ctx)
+		return nil, CategoriesOutput{Categories: result}, err
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_list_tags", Description: "List configured torrent tags."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, TagsOutput, error) {
+		result, err := client.Tags(ctx)
+		return nil, TagsOutput{Tags: result}, err
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_app_version", Description: "Read qBittorrent application and WebAPI versions."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, AppVersionOutput, error) {
+		version, webapi, err := client.AppVersion(ctx)
+		return nil, AppVersionOutput{Version: version, WebAPIVersion: webapi}, err
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_server_state", Description: "Read an allowlisted snapshot of qBittorrent server state."}, func(ctx context.Context, _ *mcp.CallToolRequest, _ EmptyInput) (*mcp.CallToolResult, ServerStateOutput, error) {
+		result, err := client.ServerState(ctx)
+		return nil, ServerStateOutput{ServerState: result}, err
+	})
+	mcp.AddTool(server, &mcp.Tool{Name: "qbittorrent_delete_torrents", Description: "Remove 1-100 explicitly listed torrents. Requires confirm=true. delete_files defaults to false; when true, downloaded data is permanently deleted."}, func(ctx context.Context, _ *mcp.CallToolRequest, input DeleteTorrentsInput) (*mcp.CallToolResult, DeleteTorrentsOutput, error) {
+		if err := validateHashes(input.Hashes); err != nil {
+			return nil, DeleteTorrentsOutput{}, err
+		}
+		if !input.Confirm {
+			return nil, DeleteTorrentsOutput{Cancelled: true, Operation: "qbittorrent_delete_torrents", Hashes: input.Hashes}, nil
+		}
+		if err := client.DeleteTorrents(ctx, input.Hashes, input.DeleteFiles); err != nil {
+			return nil, DeleteTorrentsOutput{}, err
+		}
+		return nil, DeleteTorrentsOutput{Status: "deleted"}, nil
+	})
 	return server
+}
+
+func validateTorrentHash(hash string) error {
+	if !torrentHashPattern.MatchString(hash) {
+		return fmt.Errorf("hash must contain 40 or 64 hexadecimal characters")
+	}
+	return nil
+}
+
+func boundedLimit(requested, defaultValue, maximum int) (int, error) {
+	if requested == 0 {
+		return defaultValue, nil
+	}
+	if requested < 1 || requested > maximum {
+		return 0, fmt.Errorf("limit must be between 1 and %d", maximum)
+	}
+	return requested, nil
 }
 
 func torrentListQuery(input ListTorrentsInput) (url.Values, error) {
